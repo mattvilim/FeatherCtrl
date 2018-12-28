@@ -174,6 +174,7 @@
 <text x="91.44" y="78.74" size="2.54" layer="21" rot="R180">FeatherCtrl</text>
 <text x="91.44" y="72.39" size="1.4224" layer="21" rot="R180">github.com/matthewvilim/featherctrl</text>
 <text x="91.44" y="74.93" size="1.4224" layer="21" rot="R180">Matthew Vilim</text>
+<wire x1="0" y1="0" x2="94.06" y2="0" width="0" layer="20"/>
 </plain>
 <libraries>
 <library name="mike">
@@ -699,7 +700,7 @@ design rules under a new name.</description>
 <wire x1="53.34" y1="80.01" x2="8.89" y2="80.01" width="0.2032" layer="1"/>
 <wire x1="5" y1="76.12" x2="5" y2="32.89" width="0.2032" layer="1"/>
 <wire x1="55.88" y1="77.47" x2="53.34" y2="80.01" width="0.2032" layer="1"/>
-<wire x1="8.89" y1="80.01" x2="5" y2="76.12" width="0.2032" layer="1"/>
+<wire x1="5" y1="76.12" x2="8.89" y2="80.01" width="0.2032" layer="1"/>
 </signal>
 <signal name="COL_L">
 <contactref element="U$4" pad="P$6"/>
@@ -771,9 +772,6 @@ design rules under a new name.</description>
 </signal>
 <signal name="3V">
 <contactref element="U$1" pad="2"/>
-</signal>
-<signal name="N$1">
-<wire x1="0" y1="0" x2="94.06" y2="0" width="0" layer="16"/>
 </signal>
 <signal name="3V2">
 <contactref element="U$1" pad="3"/>
