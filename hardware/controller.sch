@@ -211,8 +211,8 @@
 <symbols>
 <symbol name="NRF52FEATHER">
 <pin name="RESET" x="-22.86" y="15.24" length="middle" direction="nc"/>
-<pin name="3V@1" x="-22.86" y="12.7" length="middle" direction="pwr"/>
-<pin name="3V@2" x="-22.86" y="10.16" length="middle" direction="pwr"/>
+<pin name="3V1" x="-22.86" y="12.7" length="middle" direction="pwr"/>
+<pin name="3V2" x="-22.86" y="10.16" length="middle" direction="pwr"/>
 <pin name="GND" x="-22.86" y="7.62" length="middle"/>
 <pin name="A0" x="-22.86" y="5.08" length="middle"/>
 <pin name="A1" x="-22.86" y="2.54" length="middle"/>
@@ -268,8 +268,8 @@
 <connect gate="G$1" pin="27" pad="19"/>
 <connect gate="G$1" pin="30A6" pad="20"/>
 <connect gate="G$1" pin="31A7VBAT" pad="21"/>
-<connect gate="G$1" pin="3V@1" pad="2"/>
-<connect gate="G$1" pin="3V@2" pad="3"/>
+<connect gate="G$1" pin="3V1" pad="2"/>
+<connect gate="G$1" pin="3V2" pad="3"/>
 <connect gate="G$1" pin="7" pad="23"/>
 <connect gate="G$1" pin="A0" pad="5"/>
 <connect gate="G$1" pin="A1" pad="6"/>
@@ -777,29 +777,15 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="-25.4" y="35.56" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="3V" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="3V@1"/>
-<wire x1="81.28" y1="58.42" x2="81.28" y2="68.58" width="0.1524" layer="91"/>
-<label x="81.28" y="60.96" size="1.778" layer="95" rot="R90"/>
-</segment>
-</net>
-<net name="3V2" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="3V@2"/>
-<wire x1="78.74" y1="58.42" x2="78.74" y2="68.58" width="0.1524" layer="91"/>
-<label x="78.74" y="60.96" size="1.778" layer="95" rot="R90"/>
-</segment>
-</net>
 </nets>
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,1,83.82,43.18,U$1,3V,3V@1,,,"/>
-<approved hash="104,1,83.82,40.64,U$1,3V,3V@2,,,"/>
+<approved hash="104,1,83.82,43.18,U$1,3V,3V1,,,"/>
+<approved hash="104,1,83.82,40.64,U$1,3V,3V2,,,"/>
 <approved hash="103,1,127,33.02,U$1,EN,EN,,,"/>
 <approved hash="204,1,127,35.56,U$1,VBAT,,,,"/>
-<approved hash="104,1,17.78,48.26,IC2,VDD,3V@1,,,"/>
+<approved hash="104,1,17.78,48.26,IC2,VDD,3V1,,,"/>
 <approved hash="104,1,17.78,7.62,IC2,VSS,GND,,,"/>
 <approved hash="106,1,167.64,38.1,N$2,,,,,"/>
 <approved hash="106,1,167.64,40.64,N$3,,,,,"/>
