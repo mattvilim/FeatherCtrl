@@ -629,13 +629,12 @@ design rules under a new name.</description>
 </signal>
 <signal name="COL_G">
 <wire x1="7.62" y1="1.27" x2="5.08" y2="3.81" width="0.2032" layer="16"/>
-<wire x1="5.08" y1="3.81" x2="5" y2="3.89" width="0.2032" layer="16"/>
 <wire x1="7.62" y1="1.27" x2="16.51" y2="1.27" width="0.2032" layer="16"/>
 <wire x1="16.51" y1="1.27" x2="18.98" y2="3.74" width="0.2032" layer="16"/>
 <contactref element="U$1" pad="14"/>
 <wire x1="20.32" y1="30.48" x2="7.73" y2="17.89" width="0.2032" layer="16"/>
 <wire x1="20.32" y1="30.48" x2="20.32" y2="54.61" width="0.2032" layer="16"/>
-<wire x1="20.32" y1="54.61" x2="33.02" y2="67.31" width="0.2032" layer="16"/>
+<wire x1="33.02" y1="67.31" x2="20.32" y2="54.61" width="0.2032" layer="16"/>
 <contactref element="U$4" pad="P$13"/>
 <wire x1="7.73" y1="17.89" x2="5.08" y2="17.89" width="0.2032" layer="16"/>
 <wire x1="5.08" y1="17.89" x2="5.02" y2="17.89" width="0.2032" layer="16"/>
@@ -646,20 +645,18 @@ design rules under a new name.</description>
 <wire x1="18.98" y1="4.98" x2="18.96" y2="5" width="0.2032" layer="16"/>
 </signal>
 <signal name="COL_H">
-<wire x1="8.82" y1="20.39" x2="17.73" y2="11.48" width="0.2032" layer="1"/>
 <contactref element="U$1" pad="13"/>
-<wire x1="8.82" y1="20.39" x2="12.77" y2="20.39" width="0.2032" layer="1"/>
+<wire x1="5.02" y1="20.39" x2="12.77" y2="20.39" width="0.2032" layer="1"/>
 <wire x1="12.77" y1="20.39" x2="16.51" y2="24.13" width="0.2032" layer="1"/>
 <wire x1="16.51" y1="24.13" x2="16.51" y2="67.31" width="0.2032" layer="1"/>
 <wire x1="16.51" y1="67.31" x2="19.05" y2="69.85" width="0.2032" layer="1"/>
 <contactref element="U$4" pad="P$11"/>
-<wire x1="8.82" y1="20.39" x2="5.02" y2="20.39" width="0.2032" layer="1"/>
 <wire x1="5.02" y1="20.39" x2="5" y2="20.41" width="0.2032" layer="1"/>
 <contactref element="U$7" pad="P$10"/>
-<wire x1="17.73" y1="11.48" x2="17.73" y2="6.67" width="0.2032" layer="1"/>
-<wire x1="17.73" y1="6.67" x2="17.71" y2="6.65" width="0.2032" layer="1"/>
 <wire x1="19.05" y1="69.85" x2="33.02" y2="69.85" width="0.2032" layer="1"/>
 <wire x1="33.02" y1="69.85" x2="35.56" y2="67.31" width="0.2032" layer="1"/>
+<wire x1="12.77" y1="20.39" x2="17.71" y2="15.45" width="0.2032" layer="1"/>
+<wire x1="17.71" y1="15.45" x2="17.71" y2="6.65" width="0.2032" layer="1"/>
 </signal>
 <signal name="COL_I">
 <contactref element="U$1" pad="15"/>
