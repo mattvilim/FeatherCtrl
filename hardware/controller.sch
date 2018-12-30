@@ -170,13 +170,13 @@
 <packages>
 <package name="NRF52FEATHER">
 <description>"Adafruit NRF52 Feather"</description>
-<wire x1="-21.59" y1="-11.43" x2="24.13" y2="-11.43" width="0" layer="21"/>
-<wire x1="24.13" y1="-11.43" x2="26.67" y2="-8.89" width="0" layer="21" curve="90"/>
-<wire x1="26.67" y1="-8.89" x2="26.67" y2="8.89" width="0" layer="21"/>
-<wire x1="26.67" y1="8.89" x2="24.13" y2="11.43" width="0" layer="21" curve="90"/>
-<wire x1="24.13" y1="11.43" x2="-21.59" y2="11.43" width="0" layer="21"/>
-<wire x1="-21.59" y1="11.43" x2="-24.13" y2="8.89" width="0" layer="21" curve="90"/>
-<wire x1="-24.13" y1="-8.89" x2="-21.59" y2="-11.43" width="0" layer="21" curve="90"/>
+<wire x1="-21.59" y1="-11.43" x2="24.13" y2="-11.43" width="0.2032" layer="21"/>
+<wire x1="24.13" y1="-11.43" x2="26.67" y2="-8.89" width="0.2032" layer="21" curve="90"/>
+<wire x1="26.67" y1="-8.89" x2="26.67" y2="8.89" width="0.2032" layer="21"/>
+<wire x1="26.67" y1="8.89" x2="24.13" y2="11.43" width="0.2032" layer="21" curve="90"/>
+<wire x1="24.13" y1="11.43" x2="-21.59" y2="11.43" width="0.2032" layer="21"/>
+<wire x1="-21.59" y1="11.43" x2="-24.13" y2="8.89" width="0.2032" layer="21" curve="90"/>
+<wire x1="-24.13" y1="-8.89" x2="-21.59" y2="-11.43" width="0.2032" layer="21" curve="90"/>
 <pad name="28" x="-7.62" y="10.16" drill="1" diameter="1.778"/>
 <pad name="27" x="-5.08" y="10.16" drill="1" diameter="1.778"/>
 <pad name="26" x="-2.54" y="10.16" drill="1" diameter="1.778"/>
@@ -205,7 +205,7 @@
 <pad name="3" x="-12.7" y="-10.16" drill="1" diameter="1.778"/>
 <pad name="2" x="-15.24" y="-10.16" drill="1" diameter="1.778"/>
 <pad name="1" x="-17.78" y="-10.16" drill="1" diameter="1.778"/>
-<wire x1="-24.13" y1="-8.89" x2="-24.13" y2="8.89" width="0" layer="21"/>
+<wire x1="-24.13" y1="-8.89" x2="-24.13" y2="8.89" width="0.2032" layer="21"/>
 </package>
 </packages>
 <symbols>
