@@ -1,12 +1,16 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-extern const unsigned char matrix_row_num;
-extern const unsigned char matrix_col_num;
+#define MATRIX_ROW_NUM 7
+#define MATRIX_COL_NUM 15
+
+struct matrix_key {
+  unsigned char pressed : 1;
+  unsigned char press_time : 7;
+};
 
 struct matrix {
-  unsigned char pressed[matrix_row_num][matrix_col_num];
-  unsigned long last_scan;
+  struct matrix_key keys[MATRIX_ROW_NUM][MATRIX_COL_NUM];
 };
 
 void matrix_init(struct matrix *m);

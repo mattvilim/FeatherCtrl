@@ -5,7 +5,7 @@
 
 struct keyboard {
   struct matrix matrix;
-  struct hid hid;
+  //struct hid hid;
 };
 
 void keyboard_init(struct keyboard *k);

@@ -1,18 +1,17 @@
 #include <Arduino.h>
-#include <SPI.h>
 
-#include "bluetooth.h"
-#include "config.h"-
-#include "keycodes.h"
-#include "keymap.h"
-#include "MCP23S17.h"
+#include "keyboard.h"
 
 struct keyboard keyboard;
 
 void setup(void) {
+#if DEBUG
+  Serial.begin(9600);
+#endif
+
   keyboard_init(&keyboard);
 }
 
 void loop(void) {
-  keyboard_loop(&keyboard)
+  keyboard_loop(&keyboard);
 }

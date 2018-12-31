@@ -2,6 +2,7 @@
 #include <bluefruit.h>
 
 #include "config.h"
+/*
 #include "keycodes.h"
 
 BLEHidAdafruit blehid;
@@ -98,3 +99,4 @@ bool
 bluetooth_connected() {
   return Bluefruit.connected();
 }
+*/
