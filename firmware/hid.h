@@ -1,5 +1,5 @@
-#ifndef BLUETOOTH_H
-#define BLUETOOTH_H
+#ifndef HID_H
+#define HID_H
 
 void send_report_keyboard();
 void register_keydown(uint16_t keycode);

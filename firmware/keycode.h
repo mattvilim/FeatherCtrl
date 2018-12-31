@@ -2,6 +2,7 @@
 #define KEYCODE_H
 
 enum keycode {
+  KEYCODE_NONE = 0x0,
   KEYCODE_A = 0x4,
   KEYCODE_B = 0x5,
   KEYCODE_C = 0x6,
@@ -51,7 +52,7 @@ enum keycode {
   KEYCODE_RBRACE = 0x30,
   KEYCODE_BSLASH = 0x31,
   KEYCODE_TILDE = 0x32,
-  KEYCODE_SCLN = 0x33,
+  KEYCODE_SEMICOLON = 0x33,
   KEYCODE_SQUOTE = 0x34,
   KEYCODE_GRAVE = 0x35,
   KEYCODE_COMMA = 0x36,
