@@ -64,14 +64,14 @@ void matrix_init(struct matrix *m) {
 
   mcp.begin();
 
-  for (unsigned char r = 0; r < MATRIX_ROW_NUM; r++) {
-      mcp.pinMode(row_pins[r], OUTPUT);
-      mcp.digitalWrite(row_pins[r], HIGH);
+  for (unsigned char c = 0; c < MATRIX_COL_NUM; c++) {
+      mcp.pinMode(col_pins[c], OUTPUT);
+      mcp.digitalWrite(col_pins[c], HIGH);
   }
 
-  for (unsigned char c = 0; c < MATRIX_COL_NUM; c++) {
-      pinMode(col_pins[c], INPUT_PULLUP);
-      digitalWrite(col_pins[c], HIGH);
+  for (unsigned char r = 0; r < MATRIX_ROW_NUM; r++) {
+      pinMode(row_pins[r], INPUT_PULLUP);
+      digitalWrite(row_pins[r], HIGH);
   }
 
 }
@@ -79,21 +79,22 @@ void matrix_init(struct matrix *m) {
 void matrix_scan(struct matrix *m) {
   unsigned char scan_time = millis();
 
-  for (unsigned char r = 0; r < MATRIX_ROW_NUM; r++) {
+  for (unsigned char c = 0; c < MATRIX_COL_NUM; c++) {            
   
-    mcp.digitalWrite(row_pins[r], LOW);                  
+    mcp.digitalWrite(col_pins[c], LOW);
   
     delayMicroseconds(30);
   
-    for (unsigned char c = 0; c < MATRIX_COL_NUM; c++) {            
-      unsigned char pressed = digitalRead(col_pins[c]) == LOW;
+    for (unsigned char r = 0; r < MATRIX_ROW_NUM; r++) {
+      unsigned char pressed = digitalRead(row_pins[r]) == LOW;
 
       struct matrix_key *key = &m->keys[r][c];
 
       if (pressed && !key->pressed) {
         key->pressed = true;
         key->press_time = scan_time;
-        Serial.print("test");
+        Serial.println(r);
+        Serial.println(c);
       } else if (!pressed && key->pressed) {
         if (scan_time - key->press_time > debounce_time) {
           key->pressed = false;
@@ -101,7 +102,6 @@ void matrix_scan(struct matrix *m) {
       }
     }
   
-    mcp.digitalWrite(row_pins[r], HIGH);
+    mcp.digitalWrite(col_pins[c], HIGH);
   }
 }
-

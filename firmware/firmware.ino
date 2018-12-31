@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#include "config.h"
 #include "keyboard.h"
 
 struct keyboard keyboard;
