@@ -2,10 +2,13 @@
 #define KEYBOARD_H
 
 #include "matrix.h"
+#include "keymap.h"
+#include "hid.h"
 
 struct keyboard {
   struct matrix matrix;
-  //struct hid hid;
+  struct keymap keymap;
+  struct hid hid;
 };
 
 void keyboard_init(struct keyboard *k);

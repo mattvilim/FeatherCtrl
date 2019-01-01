@@ -1,6 +1,12 @@
 #ifndef HID_H
 #define HID_H
 
-void hid_send_keys(void);
+
+struct hid {
+  int temp;
+};
+
+void hid_init(struct hid *h);
+void hid_send_keys(struct hid *h);
 
 #endif

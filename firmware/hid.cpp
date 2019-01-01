@@ -74,7 +74,7 @@ enum scancode {
   SCANCODE_F10 = 0x43,
   SCANCODE_F11 = 0x44,
   SCANCODE_F12 = 0x45,
-  SCANCODE_PRINTSCR= 0x46,
+  SCANCODE_PRINTSCR = 0x46,
   SCANCODE_SCROLLLOCK = 0x47,
   SCANCODE_PAUSE = 0x48,
   SCANCODE_INST = 0x49,
@@ -86,7 +86,7 @@ enum scancode {
   SCANCODE_RGHT = 0x4f,
   SCANCODE_LEFT = 0x50,
   SCANCODE_DOWN = 0x51,
-  SCANCODE_UP = 0x52
+  SCANCODE_UP = 0x52,
 
   SCANCODE_LCTRL = 0x100,
   SCANCODE_LSHIFT = 0x200,
@@ -98,7 +98,10 @@ enum scancode {
   SCANCODE_RCMD = 0x8000,
 };
 
-void send_keys(void) {
+void hid_init(struct hid *h) {
+}
+
+void hid_send_keys(struct hid *h) {
   // power saving
   delay(10);
 }
