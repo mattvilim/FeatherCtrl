@@ -55,7 +55,7 @@ const enum col_pin col_pins[MATRIX_COL_NUM] = {
   COL_L
 };
 
-const char debounce_time = 7;
+const char debounce_time = 5;
 
 MCP mcp(0, 27);
 
@@ -76,7 +76,9 @@ void matrix_init(struct matrix *m) {
 
 }
 
-void matrix_scan(struct matrix *m) {
+void matrix_scan(struct matrix *m, struct matrix_report *r) {
+  memset(r, 0, sizeof(struct matrix_report))
+
   unsigned char scan_time = millis();
 
   for (unsigned char c = 0; c < MATRIX_COL_NUM; c++) {            
@@ -88,16 +90,18 @@ void matrix_scan(struct matrix *m) {
     for (unsigned char r = 0; r < MATRIX_ROW_NUM; r++) {
       unsigned char pressed = digitalRead(row_pins[r]) == LOW;
 
-      struct matrix_key *key = &m->keys[r][c];
+      struct matrix_key *key_old = &m->keys[r][c];
+      struct matrix_key key_new = { .pressed = pressed; .press_time = scan_time }
 
-      if (pressed && !key->pressed) {
-        key->pressed = true;
-        key->press_time = scan_time;
+      if (key_new->pressed && !key_old->pressed) {
+        *key_old = key_new;
+        r->pressed[r] |= 1 << c
         Serial.println(r);
         Serial.println(c);
-      } else if (!pressed && key->pressed) {
-        if (scan_time - key->press_time > debounce_time) {
-          key->pressed = false;
+      } else if (!pressed && key_old->pressed) {
+        if (key_new->press_time - key_old->press_time > debounce_time) {
+          key_old->pressed = 0;
+          r->released[r] |= 1 << c
         }
       }
     }

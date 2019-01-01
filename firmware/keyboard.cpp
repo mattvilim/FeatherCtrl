@@ -6,4 +6,6 @@ void keyboard_init(struct keyboard *k) {
 
 void keyboard_loop(struct keyboard *k) {
   matrix_scan(&k->matrix);
+  keymap_update(&k->keymap);
+  hid_send_keys(&k->hid);
 }

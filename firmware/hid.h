@@ -1,10 +1,6 @@
 #ifndef HID_H
 #define HID_H
 
-void send_report_keyboard();
-void register_keydown(uint16_t keycode);
-void register_keyup(uint16_t keycode);
-void init_bluetooth();
-bool is_bluetooth_connected();
+void hid_send_keys(void);
 
 #endif

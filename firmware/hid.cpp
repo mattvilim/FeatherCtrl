@@ -2,101 +2,103 @@
 #include <bluefruit.h>
 
 #include "config.h"
-/*
-#include "keycodes.h"
 
-BLEHidAdafruit blehid;
-BLEDis bledis;
+enum scancode {
+  SCANCODE_NONE = 0x0,
+  SCANCODE_A = 0x4,
+  SCANCODE_B = 0x5,
+  SCANCODE_C = 0x6,
+  SCANCODE_D = 0x7,
+  SCANCODE_E = 0x8,
+  SCANCODE_F = 0x9,
+  SCANCODE_G = 0xa,
+  SCANCODE_H = 0xb,
+  SCANCODE_I = 0xc,
+  SCANCODE_J = 0xd,
+  SCANCODE_K = 0xe,
+  SCANCODE_L = 0xf,
+  SCANCODE_M = 0x10,
+  SCANCODE_N = 0x11,
+  SCANCODE_O = 0x12,
+  SCANCODE_P = 0x13,
+  SCANCODE_Q = 0x14,
+  SCANCODE_R = 0x15,
+  SCANCODE_S = 0x16,
+  SCANCODE_T = 0x17,
+  SCANCODE_U = 0x18,
+  SCANCODE_V = 0x19,
+  SCANCODE_W = 0x1a,
+  SCANCODE_X = 0x1b,
+  SCANCODE_Y = 0x1c,
+  SCANCODE_Z = 0x1d,
 
-#define REPORT_KEYS 6
+  SCANCODE_1 = 0x1e,
+  SCANCODE_2 = 0x1f,
+  SCANCODE_3 = 0x20,
+  SCANCODE_4 = 0x21,
+  SCANCODE_5 = 0x22,
+  SCANCODE_6 = 0x23,
+  SCANCODE_7 = 0x24,
+  SCANCODE_8 = 0x25,
+  SCANCODE_9 = 0x26,
+  SCANCODE_0 = 0x27,
 
-uint8_t report[REPORT_KEYS] = { 0 };
-uint8_t active_mods = 0;
+  SCANCODE_ENTER = 0x28,
+  SCANCODE_ESC = 0x29,
+  SCANCODE_BSPACE = 0x2a,
+  SCANCODE_TAB = 0x2b,
+  SCANCODE_SPACE = 0x2c,
+  SCANCODE_MINUS = 0x2d,
+  SCANCODE_EQUAL = 0x2e,
+  SCANCODE_LBRACE = 0x2f,
+  SCANCODE_RBRACE = 0x30,
+  SCANCODE_BSLASH = 0x31,
+  SCANCODE_TILDE = 0x32,
+  SCANCODE_SEMICOLON = 0x33,
+  SCANCODE_SQUOTE = 0x34,
+  SCANCODE_GRAVE = 0x35,
+  SCANCODE_COMMA = 0x36,
+  SCANCODE_PERIOD = 0x37,
+  SCANCODE_SLASH = 0x38,
+  SCANCODE_CAPSLOCK = 0x39,
 
-void
-add_mods(
-  uint8_t mods
-) {
-  active_mods |= mods;                      
+  SCANCODE_F1 = 0x3a,
+  SCANCODE_F2 = 0x3b,
+  SCANCODE_F3 = 0x3c,
+  SCANCODE_F4 = 0x3d,
+  SCANCODE_F5 = 0x3e,
+  SCANCODE_F6 = 0x3f,
+  SCANCODE_F7 = 0x40,
+  SCANCODE_F8 = 0x41,
+  SCANCODE_F9 = 0x42,
+  SCANCODE_F10 = 0x43,
+  SCANCODE_F11 = 0x44,
+  SCANCODE_F12 = 0x45,
+  SCANCODE_PRINTSCR= 0x46,
+  SCANCODE_SCROLLLOCK = 0x47,
+  SCANCODE_PAUSE = 0x48,
+  SCANCODE_INST = 0x49,
+  SCANCODE_HOME = 0x4a,
+  SCANCODE_PGUP = 0x4b,
+  SCANCODE_DEL = 0x4c,
+  SCANCODE_END = 0x4d,
+  SCANCODE_PGDN = 0x4e,
+  SCANCODE_RGHT = 0x4f,
+  SCANCODE_LEFT = 0x50,
+  SCANCODE_DOWN = 0x51,
+  SCANCODE_UP = 0x52
+
+  SCANCODE_LCTRL = 0x100,
+  SCANCODE_LSHIFT = 0x200,
+  SCANCODE_LALT = 0x400,
+  SCANCODE_LCMD = 0x800,
+  SCANCODE_RCTRL = 0x1000,
+  SCANCODE_RSHIFT = 0x2000,
+  SCANCODE_RALT = 0x4000,
+  SCANCODE_RCMD = 0x8000,
+};
+
+void send_keys(void) {
+  // power saving
+  delay(10);
 }
-
-void
-del_mods(
-  uint8_t mods
-) {
-  active_mods &= ~mods;          
-}
-
-void
-send_report_keyboard() {
-  bool err = blehid.keyboardReport(
-    active_mods, report[0], report[1], report[2], report[3], report[4], report[5]
-  );
-}
-
-void
-register_keydown(uint16_t keycode) { 
-    add_mods((uint8_t)(keycode >> 8));                        // keycode >> 8 = first byte of keycode (modifier)
-
-    for (uint8_t i = 0; i < REPORT_KEYS; i++) {
-      // Key already stored there
-      if (report[i] == (uint8_t)(keycode & 0xFF)) {           // keycode & 0xFF = last byte of the keycode (key value)
-        break;
-      }
-      // Empty key space
-      if (report[i] == 0) {
-        // Store key
-        report[i] = (uint8_t)(keycode & 0xFF);
-        break;
-      }
-    }
-    
-    send_report_keyboard();
-}
-
-void
-register_keyup(uint16_t keycode) {
-    del_mods((uint8_t)(keycode >> 8));
-
-    for (uint8_t i = 0; i < REPORT_KEYS; i++) {
-      if (report[i] == (uint8_t)(keycode & 0xFF)) {           // Look for where the key is stored
-        report[i] = 0;                                        // Clear it from report array
-      }
-    }
-
-    send_report_keyboard();
-}
-
-void
-init_bluetooth() {
-
-  Bluefruit.begin();
-  Bluefruit.setName("FeatherCtrl");
-  Bluefruit.setTxPower(-8);
-  Bluefruit.autoConnLed(false);
-
-  //bledis.setManufacturer("mike wu");
-  //bledis.setModel("Kinesis Advantage 2");
-  
-  bledis.begin();
-  blehid.begin();
-
-  Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
-  Bluefruit.Advertising.addTxPower();
-  Bluefruit.Advertising.addAppearance(BLE_APPEARANCE_HID_KEYBOARD);
-  
-  Bluefruit.Advertising.addService(blehid);
-
-  Bluefruit.Advertising.addName();
-  
-  Bluefruit.Advertising.restartOnDisconnect(true);
-  Bluefruit.Advertising.setInterval(32, 244);
-  Bluefruit.Advertising.setFastTimeout(30);
-  Bluefruit.Advertising.start(0);
-}
-
-bool
-bluetooth_connected() {
-  return Bluefruit.connected();
-}
-*/
