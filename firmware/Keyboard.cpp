@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 
 void Keyboard::update(void) {
-  MatrixReport mr;
+  Matrix::report mr;
   matrix.scan(&mr);
   ScancodeReport sr;
   keymap.update(&mr, &sr);

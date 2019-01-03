@@ -10,7 +10,7 @@ const unsigned char col_pins[MATRIX_COL_COUNT] = {
 
 const char debounce_time = 5;
 
-void Matrix::Matrix(void)
+Matrix::Matrix(void)
   : mcp(0, 27) {
   memset(keys, 0, sizeof(keys));
 
@@ -28,8 +28,8 @@ void Matrix::Matrix(void)
 
 }
 
-void Matrix::scan(struct matrix_report *report) {
-  memset(report, 0, sizeof(struct matrix_report));
+void Matrix::scan(Matrix::report *report) {
+  memset(report, 0, sizeof(Matrix::report));
 
   unsigned char scan_time = millis();
 
@@ -42,8 +42,8 @@ void Matrix::scan(struct matrix_report *report) {
     for (unsigned char r = 0; r < MATRIX_ROW_COUNT; r++) {
       unsigned char pressed = digitalRead(row_pins[r]) == LOW;
 
-      struct matrix_key *key_old = &m->keys[r][c];
-      struct matrix_key key_new = { .pressed = pressed, .press_time = scan_time };
+      auto *key_old = &keys[r][c];
+      key key_new = { .pressed = pressed, .press_time = scan_time };
 
       if (key_new.pressed && !key_old->pressed) {
         *key_old = key_new;
