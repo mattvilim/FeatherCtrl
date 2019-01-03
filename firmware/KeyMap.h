@@ -419,12 +419,21 @@ const struct key_scancode key_scancode_map = {
 };
 
 
-struct keymap {
-  keymap_layer active_layer;
-  bool shift_stuck : 1;
-  bool alt_stuck : 1;
-  bool ctrl_stuck : 1;
-  bool layer_sym_stuck : 1;
+class Keymap {
+  public:
+    Keymap(void);
+    void update(
+      const struct matrix_report *mr,
+      struct scancode_report *sr
+    );
+
+  private:
+    keymap_layer activeLayer;
+
+    bool shift_stuck : 1;
+    bool alt_stuck : 1;
+    bool ctrl_stuck : 1;
+    bool layer_sym_stuck : 1;
 };
 
 struct scancode_report {
@@ -432,11 +441,5 @@ struct scancode_report {
   uint8_t modifiers;
 };
 
-void keymap_init(struct keymap *k);
-void keymap_update(
-  struct keymap *k,
-  const struct matrix_report *mr,
-  struct scancode_report *sr
-)
 
 #endif

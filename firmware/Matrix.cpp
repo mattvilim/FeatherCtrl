@@ -1,41 +1,18 @@
-#include "matrix.h"
-#include "MCP23S17.h"
+#include "Matrix.h"
 
-
-const unsigned char row_pins[] = {
-  [MATRIX_ROW1] = 4,
-  [MATRIX_ROW2] = 3,
-  [MATRIX_ROW3] = 2,
-  [MATRIX_ROW4] = 16,
-  [MATRIX_ROW5] = 15,
-  [MATRIX_ROW6] = 7,
-  [MATRIX_ROW7] = 11
+const unsigned char row_pins[MATRIX_ROW_COUNT] = {
+  4, 3, 2, 16, 15, 7, 11
 };
 
-const unsigned char col_pins[] = {
-  [MATRIX_COL_A] = 1,
-  [MATRIX_COL_B] = 2,
-  [MATRIX_COL_C] = 3,
-  [MATRIX_COL_D] = 4,
-  [MATRIX_COL_E] = 5,
-  [MATRIX_COL_F] = 6,
-  [MATRIX_COL_G] = 7,
-  [MATRIX_COL_H] = 8,
-  [MATRIX_COL_I] = 9,
-  [MATRIX_COL_J] = 10,
-  [MATRIX_COL_K] = 11,
-  [MATRIX_COL_L] = 12,
-  [MATRIX_COL_M] = 13,
-  [MATRIX_COL_N] = 14,
-  [MATRIX_COL_O] = 15
+const unsigned char col_pins[MATRIX_COL_COUNT] = {
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 };
 
 const char debounce_time = 5;
 
-MCP mcp(0, 27);
-
-void matrix_init(struct matrix *m) {
-  memset(&m->keys, 0, sizeof(m->keys));
+void Matrix::Matrix(void)
+  : mcp(0, 27) {
+  memset(keys, 0, sizeof(keys));
 
   mcp.begin();
 
@@ -51,7 +28,7 @@ void matrix_init(struct matrix *m) {
 
 }
 
-void matrix_scan(struct matrix *m, struct matrix_report *report) {
+void Matrix::scan(struct matrix_report *report) {
   memset(report, 0, sizeof(struct matrix_report));
 
   unsigned char scan_time = millis();

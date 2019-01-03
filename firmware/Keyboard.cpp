@@ -1,6 +1,6 @@
-#include "keyboard.h"
+#include "Keyboard.h"
 
-void Keyboard::loop(void) {
+void Keyboard::update(void) {
   MatrixReport mr;
   matrix.scan(&mr);
   ScancodeReport sr;
