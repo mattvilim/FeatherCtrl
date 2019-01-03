@@ -3,7 +3,7 @@
 #include "config.h"
 #include "keyboard.h"
 
-struct keyboard keyboard;
+Keyboard keyboard;
 
 void setup(void) {
 #if DEBUG
