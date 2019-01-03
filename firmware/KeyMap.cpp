@@ -1,7 +1,5 @@
 #include "KeyMap.h"
 
-#include "Matrix.h"
-
 const enum keymap_key layer_base[MATRIX_ROW_COUNT][MATRIX_COL_COUNT] = {
   { KEYMAP_KEY_NONE,
     KEYMAP_KEY_9,

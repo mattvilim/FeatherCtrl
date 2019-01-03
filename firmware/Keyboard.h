@@ -7,6 +7,7 @@
 
 class Keyboard {
   public:
+    Keyboard(void);
     void update(void);
 
   private:

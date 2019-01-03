@@ -1,5 +1,8 @@
 #include "Keyboard.h"
 
+Keyboard::Keyboard(void)
+: matrix(), keymap() { }
+
 void Keyboard::update(void) {
   Matrix::report mr;
   matrix.scan(&mr);

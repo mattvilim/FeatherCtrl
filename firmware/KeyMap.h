@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include "Matrix.h"
+
 enum keymap_layer {
   KEYMAP_LAYER_BASE,
   KEYMAP_LAYER_SYM,
@@ -423,7 +425,7 @@ class Keymap {
   public:
     Keymap(void);
     void update(
-      const struct matrix_report *mr,
+      const Matrix::report *mr,
       struct scancode_report *sr
     );
 

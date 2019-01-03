@@ -2,6 +2,7 @@
 #define MATRIX_H
 
 #include <stdint.h>
+
 #include "MCP23S17.h"
 
 #define MATRIX_ROW_COUNT 7
@@ -9,14 +10,13 @@
 
 class Matrix {
   public:
-
     struct report {
       uint16_t pressed[MATRIX_ROW_COUNT];
       uint16_t released[MATRIX_ROW_COUNT];
     };
 
     Matrix(void);
-    void scan(Matrix::report *report);
+    void scan(report *report);
 
   private:
     MCP mcp;
