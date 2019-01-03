@@ -5,11 +5,6 @@
 
 #include "Matrix.h"
 
-enum keymap_layer {
-  KEYMAP_LAYER_BASE,
-  KEYMAP_LAYER_SYM,
-  KEYMAP_LAYER_COUNT
-};
 
 enum keymap_key {
   KEYMAP_KEY_LAYER_SYM,
@@ -420,7 +415,6 @@ const struct key_scancode key_scancode_map = {
   [KEYMAP_KEY_NONE] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE }
 };
 
-
 class Keymap {
   public:
     Keymap(void);
@@ -430,12 +424,18 @@ class Keymap {
     );
 
   private:
-    keymap_layer activeLayer;
+    enum class Layer {
+      Base,
+      Sym,
+      Count
+    };
 
-    bool shift_stuck : 1;
-    bool alt_stuck : 1;
-    bool ctrl_stuck : 1;
-    bool layer_sym_stuck : 1;
+    Layer activeLayer;
+
+    bool shiftStuck : 1;
+    bool altStuck : 1;
+    bool ctrlStuck : 1;
+    bool layerSymStuck : 1;
 };
 
 struct scancode_report {

@@ -1,10 +1,10 @@
 #include "Matrix.h"
 
-const uint8_t row_pins[MATRIX_ROW_COUNT] = {
+const uint8_t row_pins[Matrix::Rows] = {
   4, 3, 2, 16, 15, 7, 11
 };
 
-const uint8_t col_pins[MATRIX_COL_COUNT] = {
+const uint8_t col_pins[Matrix::Cols] = {
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 };
 
@@ -16,12 +16,12 @@ Matrix::Matrix(void)
 
   mcp.begin();
 
-  for (uint8_t c = 0; c < MATRIX_COL_COUNT; c++) {
+  for (uint8_t c = 0; c < Matrix::Cols; c++) {
       mcp.pinMode(col_pins[c], OUTPUT);
       mcp.digitalWrite(col_pins[c], HIGH);
   }
 
-  for (uint8_t r = 0; r < MATRIX_ROW_COUNT; r++) {
+  for (uint8_t r = 0; r < Matrix::Rows; r++) {
       pinMode(row_pins[r], INPUT_PULLUP);
       digitalWrite(row_pins[r], HIGH);
   }
@@ -33,13 +33,13 @@ void Matrix::scan(Matrix::report *report) {
 
   auto scan_time = millis();
 
-  for (uint8_t c = 0; c < MATRIX_COL_COUNT; c++) {            
+  for (uint8_t c = 0; c < Matrix::Cols; c++) {            
   
     mcp.digitalWrite(col_pins[c], LOW);
   
     delayMicroseconds(30);
   
-    for (uint8_t r = 0; r < MATRIX_ROW_COUNT; r++) {
+    for (uint8_t r = 0; r < Matrix::Rows; r++) {
       auto pressed = digitalRead(row_pins[r]) == LOW;
 
       auto *key_old = &keys[r][c];

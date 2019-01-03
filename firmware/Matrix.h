@@ -5,14 +5,15 @@
 
 #include "MCP23S17.h"
 
-#define MATRIX_ROW_COUNT 7
-#define MATRIX_COL_COUNT 15
-
 class Matrix {
   public:
+    enum {
+      Rows = 7,
+      Cols = 15
+    };
     struct report {
-      uint16_t pressed[MATRIX_ROW_COUNT];
-      uint16_t released[MATRIX_ROW_COUNT];
+      uint16_t pressed[Rows];
+      uint16_t released[Cols];
     };
 
     Matrix(void);
@@ -24,7 +25,7 @@ class Matrix {
       uint8_t pressed : 1;
       uint8_t press_time : 7;
     };
-    key keys[MATRIX_ROW_COUNT][MATRIX_COL_COUNT];
+    key keys[Rows][Cols];
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "KeyMap.h"
 
-const enum keymap_key layer_base[MATRIX_ROW_COUNT][MATRIX_COL_COUNT] = {
+const enum keymap_key layerBase[Matrix::Rows][Matrix::Cols] = {
   { KEYMAP_KEY_NONE,
     KEYMAP_KEY_9,
     KEYMAP_KEY_7,
@@ -94,7 +94,7 @@ const enum keymap_key layer_base[MATRIX_ROW_COUNT][MATRIX_COL_COUNT] = {
   }
 };
 
-const enum keymap_key layer_sym[MATRIX_ROW_COUNT][MATRIX_COL_COUNT] = {
+const enum keymap_key layerSym[Matrix::Rows][Matrix::Cols] = {
   { KEYMAP_KEY_NONE,
     KEYMAP_KEY_F9,
     KEYMAP_KEY_F7,
@@ -188,21 +188,25 @@ const enum keymap_key layer_sym[MATRIX_ROW_COUNT][MATRIX_COL_COUNT] = {
   }
 };
 
-const key_config layout[KEYMAP_LAYER_COUNT][MATRIX_ROW_COUNT][MATRIX_COL_COUNT] = {
-  [KEYMAP_LAYER_BASE] = layer_base,
-  [KEYMAP_LAYER_SYM] = layer_sym
+const key_config layout[Layer::Base][Matrix::Rows][Matrix::Cols] = {
+  [Layer::Base] = layerBase,
+  [Layer::Sym] = layerSym
 }
 
 Keymap::Keymap(void) {
-  activeLayer = KEYMAP_LAYER_BASE;
+  activeLayer = Layer::Base;
+  shiftStuck = false;
+  altStuck = false;
+  ctrlStuck = false;
+  layerSymStuck = false;
 }
 
 void Keymap::update(
   const Matrix::report *mr,
   struct scancode_report *sr
 ) {
-  for (unsigned char r = 0; r < MATRIX_ROW_COUNT; r++) {
-    for (unsigned char c = 0; c < MATRIX_COL_COUNT; c++) {
+  for (unsigned char r = 0; r < Matrix::Rows; r++) {
+    for (unsigned char c = 0; c < Matrix::Cols; c++) {
       uint16_t mask = 1 << r;
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
