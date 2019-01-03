@@ -39,8 +39,8 @@ struct matrix_report {
 };
 
 struct matrix_key {
-  unsigned char pressed : 1;
-  unsigned char press_time : 7;
+  uint8_t pressed : 1;
+  uint8_t press_time : 7;
 };
 
 struct matrix {

@@ -8,7 +8,7 @@
 struct keyboard {
   struct matrix matrix;
   struct keymap keymap;
-  struct hid hid;
+  //struct hid hid;
 };
 
 void keyboard_init(struct keyboard *k);

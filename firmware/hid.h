@@ -1,9 +1,8 @@
 #ifndef HID_H
 #define HID_H
 
-
 struct hid {
-  int temp;
+  int temp
 };
 
 void hid_init(struct hid *h);

@@ -1,15 +1,16 @@
 #ifndef KEYMAP_H
 #define KEYMAP_H
 
+#include <stdint.h>
+
 enum keymap_layer {
   KEYMAP_LAYER_BASE,
+  KEYMAP_LAYER_SYM,
   KEYMAP_LAYER_COUNT
 };
 
 enum keymap_key {
-  KEYMAP_KEY_NONE,
-
-  KEYMAP_KEY_LAYER_TOGGLE,
+  KEYMAP_KEY_LAYER_SYM,
 
   KEYMAP_KEY_A,
   KEYMAP_KEY_B,
@@ -66,7 +67,22 @@ enum keymap_key {
   KEYMAP_KEY_COMMA,
   KEYMAP_KEY_PERIOD,
   KEYMAP_KEY_SLASH,
-  KEYMAP_KEY_CAPSLOCK,
+  KEYMAP_KEY_PERCENT,
+  KEYMAP_KEY_AT,
+  KEYMAP_KEY_LBRACK,
+  KEYMAP_KEY_RBRACK,
+  KEYMAP_KEY_CARROT,
+  KEYMAP_KEY_POUND,
+  KEYMAP_KEY_DOLLAR,
+  KEYMAP_KEY_LPAREN,
+  KEYMAP_KEY_RPAREN,
+  KEYMAP_KEY_ASTERISK,
+  KEYMAP_KEY_BANG,
+  KEYMAP_KEY_PLUS,
+  KEYMAP_KEY_UNDERSCORE,
+  KEYMAP_KEY_AMPERSAND,
+  KEYMAP_KEY_PIPE,
+  KEYMAP_KEY_QUESTION,
 
   KEYMAP_KEY_F1,
   KEYMAP_KEY_F2,
@@ -97,13 +113,330 @@ enum keymap_key {
   KEYMAP_KEY_CTRL,
   KEYMAP_KEY_SHIFT,
   KEYMAP_KEY_ALT,
+
+  KEYMAP_KEY_NONE
 };
+
+enum scancode {
+  SCANCODE_A,
+  SCANCODE_B,
+  SCANCODE_C,
+  SCANCODE_D,
+  SCANCODE_E,
+  SCANCODE_F,
+  SCANCODE_G,
+  SCANCODE_H,
+  SCANCODE_I,
+  SCANCODE_J,
+  SCANCODE_K,
+  SCANCODE_L,
+  SCANCODE_M,
+  SCANCODE_N,
+  SCANCODE_O,
+  SCANCODE_P,
+  SCANCODE_Q,
+  SCANCODE_R,
+  SCANCODE_S,
+  SCANCODE_T,
+  SCANCODE_U,
+  SCANCODE_V,
+  SCANCODE_W,
+  SCANCODE_X,
+  SCANCODE_Y,
+  SCANCODE_Z,
+
+  SCANCODE_1,
+  SCANCODE_2,
+  SCANCODE_3,
+  SCANCODE_4,
+  SCANCODE_5,
+  SCANCODE_6,
+  SCANCODE_7,
+  SCANCODE_8,
+  SCANCODE_9,
+  SCANCODE_0,
+
+  SCANCODE_ENTER,
+  SCANCODE_ESC,
+  SCANCODE_BSPACE,
+  SCANCODE_TAB,
+  SCANCODE_SPACE,
+  SCANCODE_MINUS,
+  SCANCODE_EQUAL,
+  SCANCODE_LBRACE,
+  SCANCODE_RBRACE,
+  SCANCODE_BSLASH,
+  SCANCODE_TILDE,
+  SCANCODE_SEMICOLON,
+  SCANCODE_SQUOTE,
+  SCANCODE_GRAVE,
+  SCANCODE_COMMA,
+  SCANCODE_PERIOD,
+  SCANCODE_SLASH,
+  SCANCODE_CAPSLOCK,
+
+  SCANCODE_F1,
+  SCANCODE_F2,
+  SCANCODE_F3,
+  SCANCODE_F4,
+  SCANCODE_F5,
+  SCANCODE_F6,
+  SCANCODE_F7,
+  SCANCODE_F8,
+  SCANCODE_F9,
+  SCANCODE_F10,
+  SCANCODE_F11,
+  SCANCODE_F12,
+  SCANCODE_PRINTSCR,
+  SCANCODE_SCROLLLOCK,
+  SCANCODE_PAUSE,
+  SCANCODE_INST,
+  SCANCODE_HOME,
+  SCANCODE_PGUP,
+  SCANCODE_DEL,
+  SCANCODE_END,
+  SCANCODE_PGDN,
+  SCANCODE_RGHT,
+  SCANCODE_LEFT,
+  SCANCODE_DOWN,
+  SCANCODE_UP,
+
+  SCANCODE_COUNT,
+  SCANCODE_NONE
+};
+
+const unsigned char scancodes[] = {
+  [SCANCODE_A] = 0x4,
+  [SCANCODE_B] = 0x5,
+  [SCANCODE_C] = 0x6,
+  [SCANCODE_D] = 0x7,
+  [SCANCODE_E] = 0x8,
+  [SCANCODE_F] = 0x9,
+  [SCANCODE_G] = 0xa,
+  [SCANCODE_H] = 0xb,
+  [SCANCODE_I] = 0xc,
+  [SCANCODE_J] = 0xd,
+  [SCANCODE_K] = 0xe,
+  [SCANCODE_L] = 0xf,
+  [SCANCODE_M] = 0x10,
+  [SCANCODE_N] = 0x11,
+  [SCANCODE_O] = 0x12,
+  [SCANCODE_P] = 0x13,
+  [SCANCODE_Q] = 0x14,
+  [SCANCODE_R] = 0x15,
+  [SCANCODE_S] = 0x16,
+  [SCANCODE_T] = 0x17,
+  [SCANCODE_U] = 0x18,
+  [SCANCODE_V] = 0x19,
+  [SCANCODE_W] = 0x1a,
+  [SCANCODE_X] = 0x1b,
+  [SCANCODE_Y] = 0x1c,
+  [SCANCODE_Z] = 0x1d,
+
+  [SCANCODE_1] = 0x1e,
+  [SCANCODE_2] = 0x1f,
+  [SCANCODE_3] = 0x20,
+  [SCANCODE_4] = 0x21,
+  [SCANCODE_5] = 0x22,
+  [SCANCODE_6] = 0x23,
+  [SCANCODE_7] = 0x24,
+  [SCANCODE_8] = 0x25,
+  [SCANCODE_9] = 0x26,
+  [SCANCODE_0] = 0x27,
+
+  [SCANCODE_ENTER] = 0x28,
+  [SCANCODE_ESC] = 0x29,
+  [SCANCODE_BSPACE] = 0x2a,
+  [SCANCODE_TAB] = 0x2b,
+  [SCANCODE_SPACE] = 0x2c,
+  [SCANCODE_MINUS] = 0x2d,
+  [SCANCODE_EQUAL] = 0x2e,
+  [SCANCODE_LBRACE] = 0x2f,
+  [SCANCODE_RBRACE] = 0x30,
+  [SCANCODE_BSLASH] = 0x31,
+  [SCANCODE_TILDE] = 0x32,
+  [SCANCODE_SEMICOLON] = 0x33,
+  [SCANCODE_SQUOTE] = 0x34,
+  [SCANCODE_GRAVE] = 0x35,
+  [SCANCODE_COMMA] = 0x36,
+  [SCANCODE_PERIOD] = 0x37,
+  [SCANCODE_SLASH] = 0x38,
+  [SCANCODE_CAPSLOCK] = 0x39,
+
+  [SCANCODE_F1] = 0x3a,
+  [SCANCODE_F2] = 0x3b,
+  [SCANCODE_F3] = 0x3c,
+  [SCANCODE_F4] = 0x3d,
+  [SCANCODE_F5] = 0x3e,
+  [SCANCODE_F6] = 0x3f,
+  [SCANCODE_F7] = 0x40,
+  [SCANCODE_F8] = 0x41,
+  [SCANCODE_F9] = 0x42,
+  [SCANCODE_F10] = 0x43,
+  [SCANCODE_F11] = 0x44,
+  [SCANCODE_F12] = 0x45,
+  [SCANCODE_PRINTSCR] = 0x46,
+  [SCANCODE_SCROLLLOCK] = 0x47,
+  [SCANCODE_PAUSE] = 0x48,
+  [SCANCODE_INST] = 0x49,
+  [SCANCODE_HOME] = 0x4a,
+  [SCANCODE_PGUP] = 0x4b,
+  [SCANCODE_DEL] = 0x4c,
+  [SCANCODE_END] = 0x4d,
+  [SCANCODE_PGDN] = 0x4e,
+  [SCANCODE_RGHT] = 0x4f,
+  [SCANCODE_LEFT] = 0x50,
+  [SCANCODE_DOWN] = 0x51,
+  [SCANCODE_UP] = 0x52
+};
+
+enum modifier {
+  MODIFIER_CTRL,
+  MODIFIER_SHIFT,
+  MODIFIER_ALT,
+
+  MODIFIER_COUNT,
+  MODIFIER_NONE
+};
+
+const uint8_t modifiers[] = {
+  [MODIFIER_CTRL] = 1 << 0,
+  [MODIFIER_SHIFT] = 1 << 1,
+  [MODIFIER_ALT] = 1 << 2
+};
+
+struct key_scancode {
+  enum scancode scancode : 7;
+  enum modifier modifier : 2;
+};
+
+const struct key_scancode key_scancode_map = {
+  [KEYMAP_KEY_LAYER_SYM] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+
+  [KEYMAP_KEY_A] = { .scancode = SCANCODE_A, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_B] = { .scancode = SCANCODE_B, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_C] = { .scancode = SCANCODE_C, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_D] = { .scancode = SCANCODE_D, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_E] = { .scancode = SCANCODE_E, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F] = { .scancode = SCANCODE_F, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_G] = { .scancode = SCANCODE_G, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_H] = { .scancode = SCANCODE_H, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_I] = { .scancode = SCANCODE_I, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_J] = { .scancode = SCANCODE_J, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_K] = { .scancode = SCANCODE_K, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_L] = { .scancode = SCANCODE_L, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_M] = { .scancode = SCANCODE_M, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_N] = { .scancode = SCANCODE_N, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_O] = { .scancode = SCANCODE_O, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_P] = { .scancode = SCANCODE_P, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_Q] = { .scancode = SCANCODE_Q, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_R] = { .scancode = SCANCODE_R, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_S] = { .scancode = SCANCODE_S, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_T] = { .scancode = SCANCODE_T, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_U] = { .scancode = SCANCODE_U, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_V] = { .scancode = SCANCODE_V, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_W] = { .scancode = SCANCODE_W, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_X] = { .scancode = SCANCODE_X, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_Y] = { .scancode = SCANCODE_Y, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_Z] = { .scancode = SCANCODE_Z, .modifier = MODIFIER_NONE },
+
+  [KEYMAP_KEY_1] = { .scancode = SCANCODE_1, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_2] = { .scancode = SCANCODE_2, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_3] = { .scancode = SCANCODE_3, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_4] = { .scancode = SCANCODE_4, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_5] = { .scancode = SCANCODE_5, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_6] = { .scancode = SCANCODE_6, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_7] = { .scancode = SCANCODE_7, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_8] = { .scancode = SCANCODE_8, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_9] = { .scancode = SCANCODE_9, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_0] = { .scancode = SCANCODE_0, .modifier = MODIFIER_NONE },
+
+  [KEYMAP_KEY_ENTER] = { .scancode = SCANCODE_ENTER, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_ESC] = { .scancode = SCANCODE_ESC, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_BSPACE] = { .scancode = SCANCODE_BSPACE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_TAB] = { .scancode = SCANCODE_TAB, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_SPACE] = { .scancode = SCANCODE_SPACE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_MINUS] = { .scancode = SCANCODE_MINUS, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_EQUAL] = { .scancode = SCANCODE_EQUAL, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_LBRACE] = { .scancode = SCANCODE_LBRACE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_RBRACE] = { .scancode = SCANCODE_RBRACE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_BSLASH] = { .scancode = SCANCODE_BSLASH, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_TILDE] = { .scancode = SCANCODE_TILDE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_SEMICOLON] = { .scancode = SCANCODE_SEMICOLON, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_SQUOTE] = { .scancode = SCANCODE_SQUOTE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_GRAVE] = { .scancode = SCANCODE_GRAVE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_COMMA] = { .scancode = SCANCODE_COMMA, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_PERIOD] = { .scancode = SCANCODE_PERIOD, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_SLASH] = { .scancode = SCANCODE_SLASH, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_PERCENT] = { .scancode = SCANCODE_5, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_AT] = { .scancode = SCANCODE_2, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_LBRACK] = { .scancode = SCANCODE_LBRACE, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_RBRACK] = { .scancode = SCANCODE_RBRACE, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_CARROT] = { .scancode = SCANCODE_6, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_POUND] = { .scancode = SCANCODE_3, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_DOLLAR] = { .scancode = SCANCODE_4, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_LPAREN] = { .scancode = SCANCODE_9, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_RPAREN] = { .scancode = SCANCODE_0, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_ASTERISK] = { .scancode = SCANCODE_8, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_BANG] = { .scancode = SCANCODE_1, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_PLUS] = { .scancode = SCANCODE_EQUAL, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_UNDERSCORE] = { .scancode = SCANCODE_MINUS, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_AMPERSAND] = { .scancode = SCANCODE_7, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_PIPE] = { .scancode = SCANCODE_BSLASH, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_QUESTION] = { .scancode = SCANCODE_SLASH, .modifier = MODIFIER_SHIFT },
+
+  [KEYMAP_KEY_F1] = { .scancode = SCANCODE_F1, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F2] = { .scancode = SCANCODE_F2, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F3] = { .scancode = SCANCODE_F3, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F4] = { .scancode = SCANCODE_F4, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F5] = { .scancode = SCANCODE_F5, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F6] = { .scancode = SCANCODE_F6, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F7] = { .scancode = SCANCODE_F7, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F8] = { .scancode = SCANCODE_F8, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F9] = { .scancode = SCANCODE_F9, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F10] = { .scancode = SCANCODE_F10, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F11] = { .scancode = SCANCODE_F11, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_F12] = { .scancode = SCANCODE_F12, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_PRINTSCR] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_SCROLLLOCK] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_PAUSE] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_INST] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_HOME] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_PGUP] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_DEL] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_END] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_PGDN] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_RGHT] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_LEFT] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_DOWN] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+  [KEYMAP_KEY_UP] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE },
+
+  [KEYMAP_KEY_CTRL] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_CTRL },
+  [KEYMAP_KEY_SHIFT] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_SHIFT },
+  [KEYMAP_KEY_ALT] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_ALT },
+
+  [KEYMAP_KEY_NONE] = { .scancode = SCANCODE_NONE, .modifier = MODIFIER_NONE }
+};
+
 
 struct keymap {
   keymap_layer active_layer;
+  bool shift_stuck : 1;
+  bool alt_stuck : 1;
+  bool ctrl_stuck : 1;
+  bool layer_sym_stuck : 1;
+};
+
+struct scancode_report {
+  uint16_t scancodes[6];
+  uint8_t modifiers;
 };
 
 void keymap_init(struct keymap *k);
-void keymap_update(struct keymap *k);
+void keymap_update(
+  struct keymap *k,
+  const struct matrix_report *mr,
+  struct scancode_report *sr
+)
 
 #endif
