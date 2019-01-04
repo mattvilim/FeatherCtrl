@@ -2,16 +2,16 @@
 
 const enum class Key layerBase[Matrix::Rows][Matrix::Cols] = {
   { Key::None,
-    Key::9,
-    Key::7,
-    Key::5,
-    Key::3,
-    Key::1,
-    Key::0,
-    Key::2,
-    Key::4,
-    Key::6,
-    Key::8,
+    Key::Num9,
+    Key::Num7,
+    Key::Num5,
+    Key::Num3,
+    Key::Num1,
+    Key::Num0,
+    Key::Num2,
+    Key::Num4,
+    Key::Num6,
+    Key::Num8,
     Key::None
   },
   { Key::None,
@@ -141,7 +141,7 @@ const enum class Key layerSym[Matrix::Rows][Matrix::Cols] = {
     Key::Pipe,
     Key::None,
     Key::None,
-    Key::MINUS,
+    Key::Minus,
     Key::Question,
     Key::None,
     Key::None,
@@ -189,8 +189,8 @@ const enum class Key layerSym[Matrix::Rows][Matrix::Cols] = {
 };
 
 const enum class Key layout[Layer::Count][Matrix::Rows][Matrix::Cols] = {
-  [Layer::Base] = layerBase,
-  [Layer::Sym] = layerSym
+  [static_cast<int>(Layer::Base)] = layerBase,
+  [static_cast<int>(Layer::Sym)] = layerSym
 }
 
 Keymap::Keymap(void) {
