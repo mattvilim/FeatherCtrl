@@ -270,7 +270,7 @@ const uint8_t scancodes[] = {
   [(int)Scancode::Del] = 0x4c,
   [(int)Scancode::End] = 0x4d,
   [(int)Scancode::PgDn] = 0x4e,
-  [(int)Scancode::PgUp] = 0x4f,
+  [(int)Scancode::Right] = 0x50,
   [(int)Scancode::Left] = 0x50,
   [(int)Scancode::Down] = 0x51,
   [(int)Scancode::Up] = 0x52
@@ -296,6 +296,7 @@ struct key_scancode {
   enum modifier modifier : 2;
 };
 
+/*
 const struct key_scancode key_scancode_map = {
   [(int)Key::LayerSym] = { .scancode = Scancode::None, .modifier = MODIFIER_NONE },
 
@@ -402,6 +403,7 @@ const struct key_scancode key_scancode_map = {
 
   [(int)Key::None] = { .scancode = Scancode::None, .modifier = MODIFIER_NONE }
 };
+*/
 
 enum class Layer {
   Base,
