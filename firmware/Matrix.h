@@ -7,13 +7,13 @@
 
 class Matrix {
   public:
-    enum {
-      Rows = 7,
-      Cols = 15
+    enum class Dim {
+      Row = 7,
+      Col = 15
     };
     struct report {
-      uint16_t pressed[Rows];
-      uint16_t released[Cols];
+      uint16_t pressed[(int)Dim::Row];
+      uint16_t released[(int)Dim::Col];
     };
 
     Matrix(void);
@@ -25,7 +25,7 @@ class Matrix {
       uint8_t pressed : 1;
       uint8_t press_time : 7;
     };
-    key keys[Rows][Cols];
+    key keys[(int)Dim::Row][(int)Dim::Col];
 };
 
 #endif

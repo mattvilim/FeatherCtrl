@@ -1,6 +1,6 @@
 #include "KeyMap.h"
 
-const enum class Key layerBase[Matrix::Rows][Matrix::Cols] = {
+const enum class Key layerBase[(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
   { Key::None,
     Key::Num9,
     Key::Num7,
@@ -94,7 +94,7 @@ const enum class Key layerBase[Matrix::Rows][Matrix::Cols] = {
   }
 };
 
-const enum class Key layerSym[Matrix::Rows][Matrix::Cols] = {
+const enum class Key layerSym[(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
   { Key::None,
     Key::F9,
     Key::F7,
@@ -188,10 +188,10 @@ const enum class Key layerSym[Matrix::Rows][Matrix::Cols] = {
   }
 };
 
-const enum class Key layout[Layer::Count][Matrix::Rows][Matrix::Cols] = {
-  [static_cast<int>(Layer::Base)] = layerBase,
-  [static_cast<int>(Layer::Sym)] = layerSym
-}
+const enum class Key layout[(int)Layer::Count] = {
+  [(int)Layer::Base] = layerBase,
+  [(int)Layer::Sym] = layerSym
+};
 
 Keymap::Keymap(void) {
   activeLayer = Layer::Base;
@@ -205,8 +205,8 @@ void Keymap::update(
   const Matrix::report *mr,
   struct scancode_report *sr
 ) {
-  for (unsigned char r = 0; r < Matrix::Rows; r++) {
-    for (unsigned char c = 0; c < Matrix::Cols; c++) {
+  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
+    for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
       uint16_t mask = 1 << r;
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
