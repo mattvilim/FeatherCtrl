@@ -413,10 +413,15 @@ enum class Layer {
 
 class Keymap {
   public:
+    struct Report {
+      uint16_t scancodes[6];
+      uint8_t modifiers;
+    };
+
     Keymap(void);
     void update(
       const Matrix::report *mr,
-      struct scancode_report *sr
+      Report *kr
     );
 
   private:
@@ -426,11 +431,6 @@ class Keymap {
     bool altStuck : 1;
     bool ctrlStuck : 1;
     bool layerSymStuck : 1;
-};
-
-struct scancode_report {
-  uint16_t scancodes[6];
-  uint8_t modifiers;
 };
 
 

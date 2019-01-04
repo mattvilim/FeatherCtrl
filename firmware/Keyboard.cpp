@@ -6,7 +6,7 @@ Keyboard::Keyboard(void)
 void Keyboard::update(void) {
   Matrix::report mr;
   matrix.scan(&mr);
-  ScancodeReport sr;
-  keymap.update(&mr, &sr);
+  Keymap::Report kr;
+  keymap.update(&mr, &kr);
   //hid_send_keys(&k->hid);
 }

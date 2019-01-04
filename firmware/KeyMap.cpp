@@ -31,7 +31,7 @@ Keymap::Keymap(void) {
 
 void Keymap::update(
   const Matrix::report *mr,
-  struct scancode_report *sr
+  Keymap::Report *kr
 ) {
   for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
     for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
