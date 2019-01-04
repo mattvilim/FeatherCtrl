@@ -9,7 +9,7 @@ class Matrix {
   public:
     enum class Dim {
       Row = 7,
-      Col = 15
+      Col = 12
     };
     struct report {
       uint16_t pressed[(int)Dim::Row];
