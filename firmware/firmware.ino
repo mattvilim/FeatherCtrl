@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 #include "config.h"
 #include "Keyboard.h"
 
@@ -13,4 +11,5 @@ void setup(void) {
 
 void loop(void) {
   keyboard.update();
+  delay(5);
 }

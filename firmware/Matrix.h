@@ -13,7 +13,7 @@ class Matrix {
     };
     struct report {
       uint16_t pressed[(int)Dim::Row];
-      uint16_t released[(int)Dim::Col];
+      uint16_t released[(int)Dim::Row];
     };
 
     Matrix(void);

@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 
 Keyboard::Keyboard(void)
-: matrix(), keymap() { }
+: matrix(), keymap() {}
 
 void Keyboard::update(void) {
   Matrix::report mr;
