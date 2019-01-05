@@ -420,7 +420,7 @@ class Keymap {
 
     Keymap(void);
     void update(
-      const Matrix::report *mr,
+      const Matrix::Report *mr,
       Report *kr
     );
 

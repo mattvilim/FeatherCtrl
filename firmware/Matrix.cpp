@@ -1,63 +1,65 @@
 #include "Matrix.h"
 
-const uint8_t row_pins[(int)Matrix::Dim::Row] = {
+const uint8_t rowPins[(int)Matrix::Dim::Row] = {
   4, 3, 2, 16, 15, 7, 11
 };
 
-const uint8_t col_pins[(int)Matrix::Dim::Col] = {
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+const uint8_t colPins[(int)Matrix::Dim::Col] = {
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 };
 
 uint8_t debounce_time = 5;
+
+void Matrix::begin(void) {
+  mcp.begin();
+
+  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
+      mcp.pinMode(colPins[c], OUTPUT);
+      mcp.digitalWrite(colPins[c], HIGH);
+  }
+
+  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
+      pinMode(rowPins[r], INPUT_PULLUP);
+      digitalWrite(rowPins[r], HIGH);
+  }
+}
 
 Matrix::Matrix(void)
   : mcp(0, 27) {
   memset(keys, 0, sizeof(keys));
 
-  mcp.begin();
-
-  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
-      mcp.pinMode(col_pins[c], OUTPUT);
-      mcp.digitalWrite(col_pins[c], HIGH);
-  }
-
-  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
-      pinMode(row_pins[r], INPUT_PULLUP);
-      digitalWrite(row_pins[r], HIGH);
-  }
-
 }
 
-void Matrix::scan(Matrix::report *report) {
-  memset(report, 0, sizeof(Matrix::report));
+void Matrix::scan(Matrix::Report *report) {
+  memset(report, 0, sizeof(Matrix::Report));
 
-  auto scan_time = millis();
+  auto scanTime = millis();
 
-  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {            
+  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
   
-    mcp.digitalWrite(col_pins[c], LOW);
+    mcp.digitalWrite(colPins[c], LOW);
   
     delayMicroseconds(30);
   
     for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
-      auto pressed = digitalRead(row_pins[r]) == LOW;
+      auto pressed = digitalRead(rowPins[r]) == LOW;
 
-      auto *key_old = &keys[r][c];
-      key key_new = { .pressed = pressed, .press_time = scan_time };
+      auto *keyOld = &keys[r][c];
+      KeyState keyNew = { .pressed = pressed, .pressTime = scanTime };
 
-      if (key_new.pressed && !key_old->pressed) {
-        *key_old = key_new;
+      if (keyNew.pressed && !keyOld->pressed) {
+        *keyOld = keyNew;
         report->pressed[r] |= 1 << c;
         Serial.println(r);
         Serial.println(c);
-      } else if (!pressed && key_old->pressed) {
-        if (key_new.press_time - key_old->press_time > debounce_time) {
-          key_old->pressed = 0;
+      } else if (!pressed && keyOld->pressed) {
+        if (keyNew.pressTime - keyOld->pressTime > debounce_time) {
+          keyOld->pressed = false;
           report->released[r] |= 1 << c;
         }
       }
     }
   
-    mcp.digitalWrite(col_pins[c], HIGH);
+    mcp.digitalWrite(colPins[c], HIGH);
   }
 }

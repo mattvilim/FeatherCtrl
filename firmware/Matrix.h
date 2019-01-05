@@ -11,21 +11,22 @@ class Matrix {
       Row = 7,
       Col = 12
     };
-    struct report {
+    struct Report {
       uint16_t pressed[(int)Dim::Row];
       uint16_t released[(int)Dim::Row];
     };
 
     Matrix(void);
-    void scan(report *report);
+    void scan(Report *report);
+    void begin(void);
 
   private:
     MCP mcp;
-    struct key {
-      uint8_t pressed : 1;
-      uint8_t press_time : 7;
+    struct KeyState {
+      bool pressed : 1;
+      uint8_t pressTime : 7;
     };
-    key keys[(int)Dim::Row][(int)Dim::Col];
+    KeyState keys[(int)Dim::Row][(int)Dim::Col];
 };
 
 #endif

@@ -30,15 +30,14 @@ Keymap::Keymap(void) {
 }
 
 void Keymap::update(
-  const Matrix::report *mr,
+  const Matrix::Report *mr,
   Keymap::Report *kr
 ) {
   for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
     for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
-      uint16_t mask = 1 << r;
+      uint16_t mask = 1 << c;
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
     }
   }
 }
-

@@ -3,12 +3,12 @@
 
 #include "Matrix.h"
 #include "KeyMap.h"
-#include "HID.h"
 
 class Keyboard {
   public:
     Keyboard(void);
     void update(void);
+    void begin(void);
 
   private:
     Matrix matrix;
