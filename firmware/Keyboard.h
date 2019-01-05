@@ -7,8 +7,8 @@
 class Keyboard {
   public:
     Keyboard(void);
-    void update(void);
     void begin(void);
+    void update(void);
 
   private:
     Matrix matrix;

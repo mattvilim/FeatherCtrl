@@ -3,6 +3,10 @@
 Keyboard::Keyboard(void)
 : matrix(), keymap() {}
 
+void Keyboard::begin(void) {
+  matrix.begin();
+}
+
 void Keyboard::update(void) {
   Matrix::Report mr;
   matrix.scan(&mr);
@@ -11,6 +15,3 @@ void Keyboard::update(void) {
   //hid_send_keys(&k->hid);
 }
 
-void Keyboard::begin(void) {
-  matrix.begin();
-}

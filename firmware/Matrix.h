@@ -17,8 +17,8 @@ class Matrix {
     };
 
     Matrix(void);
-    void scan(Report *report);
     void begin(void);
+    void scan(Report *report);
 
   private:
     MCP mcp;
