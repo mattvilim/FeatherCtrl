@@ -1,196 +1,6 @@
 #include "KeyMap.h"
 
-enum class Key {
-  A,
-  B,
-  C,
-  D,
-  E,
-  F,
-  G,
-  H,
-  I,
-  J,
-  K,
-  L,
-  M,
-  N,
-  O,
-  P,
-  Q,
-  R,
-  S,
-  T,
-  U,
-  V,
-  W,
-  X,
-  Y,
-  Z,
-
-  Num1,
-  Num2,
-  Num3,
-  Num4,
-  Num5,
-  Num6,
-  Num7,
-  Num8,
-  Num9,
-  Num0,
-
-  Enter,
-  Esc,
-  BSpace,
-  Tab,
-  Space,
-  Minus,
-  Equal,
-  LBrace,
-  RBrace,
-  BSlash,
-  Tilde,
-  Semicolon,
-  SQuote,
-  Grave,
-  Comma,
-  Period,
-  Slash,
-  Percent,
-  At,
-  LBrack,
-  RBrack,
-  Carrot,
-  Pound,
-  Dollar,
-  LParen,
-  RParen,
-  Asterisk,
-  Bang,
-  Plus,
-  Underscore,
-  Ampersand,
-  Pipe,
-  Question,
-
-  F1,
-  F2,
-  F3,
-  F4,
-  F5,
-  F6,
-  F7,
-  F8,
-  F9,
-  F10,
-  F11,
-  F12,
-  PrintScr,
-  ScrollLock,
-  Pause,
-  Home,
-  PgUp,
-  Del,
-  End,
-  PgDn,
-  Right,
-  Left,
-  Down,
-  Up,
-
-  Ctrl,
-  Shift,
-  Alt,
-
-  LayerSym,
-
-  None
-};
-
-enum class Scancode {
-  A,
-  B,
-  C,
-  D,
-  E,
-  F,
-  G,
-  H,
-  I,
-  J,
-  K,
-  L,
-  M,
-  N,
-  O,
-  P,
-  Q,
-  R,
-  S,
-  T,
-  U,
-  V,
-  W,
-  X,
-  Y,
-  Z,
-
-  Num1,
-  Num2,
-  Num3,
-  Num4,
-  Num5,
-  Num6,
-  Num7,
-  Num8,
-  Num9,
-  Num0,
-
-  Enter,
-  Esc,
-  BSpace,
-  Tab,
-  Space,
-  Minus,
-  Equal,
-  LBrace,
-  RBrace,
-  BSlash,
-  Tilde,
-  Semicolon,
-  SQuote,
-  Grave,
-  Comma,
-  Period,
-  Slash,
-
-  F1,
-  F2,
-  F3,
-  F4,
-  F5,
-  F6,
-  F7,
-  F8,
-  F9,
-  F10,
-  F11,
-  F12,
-  Home,
-  PgUp,
-  Del,
-  End,
-  PgDn,
-  Right,
-  Left,
-  Down,
-  Up,
-
-  Count,
-  None
-};
-
-const uint8_t scancodes[] = {
+const uint8_t Keymap::scancodes[] = {
   [(int)Scancode::A] = 0x4,
   [(int)Scancode::B] = 0x5,
   [(int)Scancode::C] = 0x6,
@@ -270,19 +80,7 @@ const uint8_t scancodes[] = {
   [(int)Scancode::Up] = 0x52
 };
 
-enum class ScancodeMod {
-  None = 0,
-  Ctrl = 1 << 0,
-  Shift = 1 << 1,
-  Alt = 1 << 2
-};
-
-struct KeyInfo {
-  enum class Scancode scancode : 7;
-  enum class ScancodeMod mod : 3;
-};
-
-const struct KeyInfo scancodeMap[] = {
+const Keymap::KeyInfo Keymap::scancodeMap[] = {
   [(int)Key::A] = { .scancode = Scancode::A, .mod = ScancodeMod::None },
   [(int)Key::B] = { .scancode = Scancode::B, .mod = ScancodeMod::None },
   [(int)Key::C] = { .scancode = Scancode::C, .mod = ScancodeMod::None },
@@ -381,13 +179,7 @@ const struct KeyInfo scancodeMap[] = {
   [(int)Key::Up] = { .scancode = Scancode::None, .mod = ScancodeMod::Shift }
 };
 
-enum class Layer {
-  Base,
-  Sym,
-  Count
-};
-
-enum class Key layout[(int)Layer::Count][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
+const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
   [(int)Layer::Base] = {
     { Key::None, Key::Num9, Key::Num7, Key::Num5, Key::Num3, Key::Num1, Key::Num0, Key::Num2, Key::Num4, Key::Num6, Key::Num8, Key::None },
     { Key::None, Key::SQuote, Key::Comma, Key::Period, Key::P, Key::Y, Key::F, Key::G, Key::C, Key::R, Key::L, Key::None },
@@ -409,11 +201,7 @@ enum class Key layout[(int)Layer::Count][(int)Matrix::Dim::Row][(int)Matrix::Dim
 };
 
 Keymap::Keymap(void) {
-  activeLayer = Layer::Base;
-  shiftStuck = false;
-  altStuck = false;
-  ctrlStuck = false;
-  layerSymStuck = false;
+  activeLayer = Keymap::Layer::Base;
 }
 
 void Keymap::update(
@@ -425,6 +213,26 @@ void Keymap::update(
       uint16_t mask = 1 << c;
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
+
+      /*
+      auto k = layout[activeLayer][r][c];
+      switch k {
+        case Key::None: break;
+        case Key::LayerSym:
+          break;
+        case Key::Ctrl:
+          break;
+        case Key::Alt:
+          break;
+        case Key::Shift:
+          break;
+        default:
+          auto info = &scancodeMap[k];
+          auto scan = info->scancode;
+          kr->scancodes[scan / 8] |= 1 << (scan % 8)
+
+      };
+      */
     }
   }
 }
