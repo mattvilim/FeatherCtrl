@@ -11,6 +11,7 @@ class Matrix {
       Row = 7,
       Col = 12
     };
+
     struct Report {
       uint16_t pressed[(int)Dim::Row];
       uint16_t released[(int)Dim::Row];
@@ -21,11 +22,12 @@ class Matrix {
     void scan(Report *report);
 
   private:
-    MCP mcp;
     struct KeyState {
       bool pressed : 1;
       uint8_t pressTime : 7;
     };
+
+    MCP mcp;
     KeyState keys[(int)Dim::Row][(int)Dim::Col];
 
     static const uint8_t rowPins[];
