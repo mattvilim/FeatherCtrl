@@ -87,7 +87,7 @@ class Keymap {
 
     static const uint8_t scancodes[];
     static const KeyInfo scancodeMap[];
-    static const Key layout[(int)Keymap::Layer::Count][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col];
+    static const Key layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col];
 };
 
 #endif
