@@ -27,6 +27,10 @@ class Matrix {
       uint8_t pressTime : 7;
     };
     KeyState keys[(int)Dim::Row][(int)Dim::Col];
+
+    static const uint8_t rowPins[];
+    static const uint8_t colPins[];
+    static const uint8_t debounce_time = 5;
 };
 
 #endif

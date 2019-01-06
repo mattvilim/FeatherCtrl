@@ -1,14 +1,12 @@
 #include "Matrix.h"
 
-const uint8_t rowPins[(int)Matrix::Dim::Row] = {
+const uint8_t Matrix::rowPins[] = {
   4, 3, 2, 16, 15, 7, 11
 };
 
-const uint8_t colPins[(int)Matrix::Dim::Col] = {
+const uint8_t Matrix::colPins[] = {
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 };
-
-uint8_t debounce_time = 5;
 
 void Matrix::begin(void) {
   mcp.begin();
