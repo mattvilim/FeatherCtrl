@@ -220,7 +220,7 @@ void Keymap::update(
 ) {
   for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
     for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
-      uint16_t mask = 1 << c;
+      auto mask = 1 << c;
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
 
@@ -239,7 +239,7 @@ void Keymap::update(
           auto info = &scancodeMap[(int)k];
           auto scan = (int)info->scancode;
           kr->scancodes[scan / 8] |= 1 << (scan % 8);
-
+          break;
       };
     }
   }
