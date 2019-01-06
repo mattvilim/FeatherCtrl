@@ -68,25 +68,26 @@ class Keymap {
       None
     };
 
-    enum class ScancodeMod {
-      None = 0,
-      Ctrl = 1 << 0,
-      Shift = 1 << 1,
-      Alt = 1 << 2
+    enum class Mod {
+      Ctrl,
+      Shift,
+      Alt,
+      Count,
+      None
     };
-
 
     Layer activeLayer;
 
-    ModState mods;
+    ModState mods[(int)Mod::Count];
 
     struct KeyInfo {
       Scancode scancode : 7;
-      ScancodeMod mod : 3;
+      Mod mod : 3;
     };
 
     static const uint8_t scancodes[];
     static const KeyInfo scancodeMap[];
+    static const uint8_t modMap[];
     static const Key layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col];
 };
 
