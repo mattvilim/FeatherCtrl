@@ -179,8 +179,8 @@ const Keymap::KeyInfo Keymap::scancodeMap[] = {
   [(int)Key::Up] = { .scancode = Scancode::Up, .mod = Mod::None },
 
   [(int)Key::Ctrl] = { .scancode = Scancode::None, .mod = Mod::Ctrl },
-  [(int)Key::Shift] = { .scancode = Scancode::None, .mod = Mod::Shift }
-  [(int)Key::Alt] = { .scancode = Scancode::None, .mod = Mod::Alt }
+  [(int)Key::Shift] = { .scancode = Scancode::None, .mod = Mod::Shift },
+  [(int)Key::Alt] = { .scancode = Scancode::None, .mod = Mod::Alt },
   [(int)Key::Sym] = { .scancode = Scancode::None, .mod = Mod::Sym }
 };
 
@@ -197,7 +197,7 @@ const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col]
     { Key::None, Key::SQuote, Key::Comma, Key::Period, Key::P, Key::Y, Key::F, Key::G, Key::C, Key::R, Key::L, Key::None },
     { Key::None, Key::A, Key::O, Key::E, Key::U, Key::I, Key::D, Key::H, Key::T, Key::N, Key::S, Key::None },
     { Key::None, Key::Semicolon, Key::Q, Key::J, Key::K, Key::X, Key::B, Key::M, Key::W, Key::V, Key::Z, Key::None },
-    { Key::None, Key::None, Key::Alt, Key::LayerSym, Key::None, Key::Ctrl, Key::Ctrl, Key::None, Key::LayerSym, Key::Alt, Key::None, Key::None },
+    { Key::None, Key::None, Key::Alt, Key::Sym, Key::None, Key::Ctrl, Key::Ctrl, Key::None, Key::Sym, Key::Alt, Key::None, Key::None },
     { Key::None, Key::None, Key::None, Key::None, Key::None, Key::None, Key::Space, Key::BSpace, Key::None, Key::None, Key::None, Key::None },
     { Key::None, Key::None, Key::None, Key::Enter, Key::Esc, Key::None, Key::None, Key::None, Key::None, Key::None, Key::None, Key::None }
   },
@@ -218,14 +218,14 @@ Keymap::Keymap(void) {
   }
 }
 
-Key activeKey(uint8_t r, uint8_t c) {
+Keymap::Key Keymap::activeKey(uint8_t r, uint8_t c) {
   switch (modStates[(int)Mod::Sym]) {
     case ModState::Off:
-      return layout[Layer::Base][r][c];
+      return layout[(int)Layer::Base][r][c];
     case ModState::StickLight:
     case ModState::StickHeavy:
-      auto k = layout[Layer::Sym][r][c];
-      return k == Key::None ? layout[Layer::Base][r][c] : k;
+      auto k = layout[(int)Layer::Sym][r][c];
+      return k == Key::None ? layout[(int)Layer::Base][r][c] : k;
   }
 }
 
@@ -246,21 +246,21 @@ void Keymap::update(
           auto info = &scancodeMap[(int)k];
           auto scan = (int)info->scancode;
           auto mod = (int)info->mod;
-          if (scan == Scancode::None) {
+          if (scan == (int)Scancode::None) {
             switch (modStates[mod]) {
               case ModState::Off:
-                modStates[mod] = StickLight;
+                modStates[mod] = ModState::StickLight;
                 break;
               case ModState::StickLight:
-                modStates[mod] = StickHeavy;
+                modStates[mod] = ModState::StickHeavy;
                 break;
               case ModState::StickHeavy:
-                modStates[mod] = Off;
+                modStates[mod] = ModState::Off;
                 break;
             }
           } else {
             kr->scancodes[scan / 8] |= 1 << (scan % 8);
-            kr->modifiers |= 
+            //kr->modifiers |= 
           }
           break;
       };
