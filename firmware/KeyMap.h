@@ -45,9 +45,7 @@ class Keymap {
 
       PrintScr, ScrollLock, Pause, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
-      Ctrl, Shift, Alt,
-
-      LayerSym,
+      Ctrl, Shift, Alt, Sym,
 
       None
     };
@@ -72,13 +70,14 @@ class Keymap {
       Ctrl,
       Shift,
       Alt,
+      Sym,
       Count,
       None
     };
 
-    Layer activeLayer;
+    Key activeKey(uint8_t r, uint8_t c);
 
-    ModState mods[(int)Mod::Count];
+    ModState modStates[(int)Mod::Count];
 
     struct KeyInfo {
       Scancode scancode : 7;

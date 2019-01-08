@@ -176,13 +176,19 @@ const Keymap::KeyInfo Keymap::scancodeMap[] = {
   [(int)Key::Right] = { .scancode = Scancode::Right, .mod = Mod::None },
   [(int)Key::Left] = { .scancode = Scancode::Left, .mod = Mod::None },
   [(int)Key::Down] = { .scancode = Scancode::Down, .mod = Mod::None },
-  [(int)Key::Up] = { .scancode = Scancode::Up, .mod = Mod::None }
+  [(int)Key::Up] = { .scancode = Scancode::Up, .mod = Mod::None },
+
+  [(int)Key::Ctrl] = { .scancode = Scancode::None, .mod = Mod::Ctrl },
+  [(int)Key::Shift] = { .scancode = Scancode::None, .mod = Mod::Shift }
+  [(int)Key::Alt] = { .scancode = Scancode::None, .mod = Mod::Alt }
+  [(int)Key::Sym] = { .scancode = Scancode::None, .mod = Mod::Sym }
 };
 
 const uint8_t Keymap::modMap[] = {
   [(int)Mod::Ctrl] = 1 << 0,
   [(int)Mod::Shift] = 1 << 1,
-  [(int)Mod::Alt] = 1 << 2
+  [(int)Mod::Alt] = 1 << 2,
+  [(int)Mod::Sym] = 0
 };
 
 const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
@@ -207,10 +213,19 @@ const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col]
 };
 
 Keymap::Keymap(void) {
-  activeLayer = Keymap::Layer::Base;
-
   for (int m = 0; m < (int)Mod::Count; m++) {
-    mods[m] = ModState::Off;
+    modStates[m] = ModState::Off;
+  }
+}
+
+Key activeKey(uint8_t r, uint8_t c) {
+  switch (modStates[(int)Mod::Sym]) {
+    case ModState::Off:
+      return layout[Layer::Base][r][c];
+    case ModState::StickLight:
+    case ModState::StickHeavy:
+      auto k = layout[Layer::Sym][r][c];
+      return k == Key::None ? layout[Layer::Base][r][c] : k;
   }
 }
 
@@ -224,21 +239,29 @@ void Keymap::update(
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
 
-      auto k = layout[(int)activeLayer][r][c];
+      auto k = activeKey(r, c);
       switch (k) {
         case Key::None: break;
-        case Key::LayerSym:
-          break;
-        case Key::Ctrl:
-          break;
-        case Key::Alt:
-          break;
-        case Key::Shift:
-          break;
         default:
           auto info = &scancodeMap[(int)k];
           auto scan = (int)info->scancode;
-          kr->scancodes[scan / 8] |= 1 << (scan % 8);
+          auto mod = (int)info->mod;
+          if (scan == Scancode::None) {
+            switch (modStates[mod]) {
+              case ModState::Off:
+                modStates[mod] = StickLight;
+                break;
+              case ModState::StickLight:
+                modStates[mod] = StickHeavy;
+                break;
+              case ModState::StickHeavy:
+                modStates[mod] = Off;
+                break;
+            }
+          } else {
+            kr->scancodes[scan / 8] |= 1 << (scan % 8);
+            kr->modifiers |= 
+          }
           break;
       };
     }
