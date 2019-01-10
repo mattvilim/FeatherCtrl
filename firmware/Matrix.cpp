@@ -1,22 +1,39 @@
 #include "Matrix.h"
 
 const uint8_t Matrix::rowPins[] = {
-  4, 3, 2, 16, 15, 7, 11
+  [(int)Row::N1] = 4,
+  [(int)Row::N2] = 3,
+  [(int)Row::N3] = 2,
+  [(int)Row::N4] = 16,
+  [(int)Row::N5] = 15,
+  [(int)Row::N6] = 7,
+  [(int)Row::N7] = 11
 };
 
 const uint8_t Matrix::colPins[] = {
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+  [(int)Col::A] = 1,
+  [(int)Col::B] = 2,
+  [(int)Col::C] = 3,
+  [(int)Col::D] = 4,
+  [(int)Col::E] = 5,
+  [(int)Col::F] = 6,
+  [(int)Col::G] = 7,
+  [(int)Col::H] = 8,
+  [(int)Col::I] = 9,
+  [(int)Col::J] = 10,
+  [(int)Col::K] = 11,
+  [(int)Col::L] = 12
 };
 
 void Matrix::begin(void) {
   mcp.begin();
 
-  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
+  for (auto c = 0; c < (int)Matrix::Col::Count; c++) {
       mcp.pinMode(colPins[c], OUTPUT);
       mcp.digitalWrite(colPins[c], HIGH);
   }
 
-  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
+  for (auto r = 0; r < (int)Matrix::Row::Count; r++) {
       pinMode(rowPins[r], INPUT_PULLUP);
       digitalWrite(rowPins[r], HIGH);
   }
@@ -33,13 +50,13 @@ void Matrix::scan(Matrix::Report *report) {
 
   auto scanTime = millis();
 
-  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
+  for (auto c = 0; c < (int)Matrix::Col::Count; c++) {
   
     mcp.digitalWrite(colPins[c], LOW);
   
     delayMicroseconds(30);
   
-    for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
+    for (auto r = 0; r < (int)Matrix::Row::Count; r++) {
       auto pressed = digitalRead(rowPins[r]) == LOW;
 
       auto *keyOld = &keys[r][c];

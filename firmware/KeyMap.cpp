@@ -191,7 +191,7 @@ const uint8_t Keymap::modMap[] = {
   [(int)Mod::Sym] = 0
 };
 
-const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
+const Keymap::Key Keymap::layout[][(int)Matrix::Row::Count][(int)Matrix::Col::Count] = {
   [(int)Layer::Base] = {
     { Key::None, Key::Num9, Key::Num7, Key::Num5, Key::Num3, Key::Num1, Key::Num0, Key::Num2, Key::Num4, Key::Num6, Key::Num8, Key::None },
     { Key::None, Key::SQuote, Key::Comma, Key::Period, Key::P, Key::Y, Key::F, Key::G, Key::C, Key::R, Key::L, Key::None },
@@ -233,8 +233,8 @@ void Keymap::update(
   const Matrix::Report *mr,
   Keymap::Report *kr
 ) {
-  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
-    for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
+  for (auto r = 0; r < (int)Matrix::Row::Count; r++) {
+    for (auto c = 0; c < (int)Matrix::Col::Count; c++) {
       auto mask = 1 << c;
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
