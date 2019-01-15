@@ -3,6 +3,7 @@
 
 #include "Matrix.h"
 #include "KeyMap.h"
+#include "HID.h"
 
 class Keyboard {
   public:
@@ -13,7 +14,7 @@ class Keyboard {
   private:
     Matrix matrix;
     Keymap keymap;
-    //Hid hid;
+    HID hid;
 };
 
 
