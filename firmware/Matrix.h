@@ -15,6 +15,11 @@ class Matrix {
       A, B, C, D, E, F, G, H, I, J, K, L, Count
     };
 
+    struct Key {
+      uint8_t r;
+      uint8_t c;
+    };
+
     struct Report {
       uint16_t pressed[(int)Row::Count];
       uint16_t released[(int)Col::Count];
@@ -26,8 +31,8 @@ class Matrix {
 
   private:
     struct KeyState {
-      bool pressed : 1;
-      uint8_t pressTime : 7;
+      uint8_t pressTime;
+      bool pressed;
     };
 
     MCP mcp;
@@ -35,7 +40,7 @@ class Matrix {
 
     static const uint8_t rowPins[];
     static const uint8_t colPins[];
-    static const uint8_t debounce_time = 5;
+    static const uint8_t debounceTime = 5;
 };
 
 #endif

@@ -75,7 +75,7 @@ class Keymap {
       None
     };
 
-    Key activeKey(uint8_t r, uint8_t c);
+    Key activeKey(const Matrix::Key k);
 
     ModState modStates[(int)Mod::Count];
 

@@ -42,7 +42,6 @@ void Matrix::begin(void) {
 Matrix::Matrix(void)
   : mcp(0, 27) {
   memset(keys, 0, sizeof(keys));
-
 }
 
 void Matrix::scan(Matrix::Report *report) {
@@ -60,7 +59,7 @@ void Matrix::scan(Matrix::Report *report) {
       auto pressed = digitalRead(rowPins[r]) == LOW;
 
       auto *keyOld = &keys[r][c];
-      KeyState keyNew = { .pressed = pressed, .pressTime = scanTime };
+      KeyState keyNew = { .pressTime = pressed, .pressed = scanTime };
 
       if (keyNew.pressed && !keyOld->pressed) {
         *keyOld = keyNew;
@@ -68,7 +67,7 @@ void Matrix::scan(Matrix::Report *report) {
         Serial.println(r);
         Serial.println(c);
       } else if (!pressed && keyOld->pressed) {
-        if (keyNew.pressTime - keyOld->pressTime > debounce_time) {
+        if (keyNew.pressTime - keyOld->pressTime > debounceTime) {
           keyOld->pressed = false;
           report->released[r] |= 1 << c;
         }

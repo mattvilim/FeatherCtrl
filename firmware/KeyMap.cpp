@@ -187,8 +187,7 @@ const Keymap::KeyInfo Keymap::scancodeMap[] = {
 const uint8_t Keymap::modMap[] = {
   [(int)Mod::Ctrl] = 1 << 0,
   [(int)Mod::Shift] = 1 << 1,
-  [(int)Mod::Alt] = 1 << 2,
-  [(int)Mod::Sym] = 0
+  [(int)Mod::Alt] = 1 << 2
 };
 
 const Keymap::Key Keymap::layout[][(int)Matrix::Row::Count][(int)Matrix::Col::Count] = {
@@ -218,14 +217,14 @@ Keymap::Keymap(void) {
   }
 }
 
-Keymap::Key Keymap::activeKey(uint8_t r, uint8_t c) {
+Keymap::Key Keymap::activeKey(const Matrix::Key k) {
   switch (modStates[(int)Mod::Sym]) {
     case ModState::Off:
-      return layout[(int)Layer::Base][r][c];
+      return layout[(int)Layer::Base][k.r][k.c];
     case ModState::StickLight:
     case ModState::StickHeavy:
-      auto k = layout[(int)Layer::Sym][r][c];
-      return k == Key::None ? layout[(int)Layer::Base][r][c] : k;
+      auto key = layout[(int)Layer::Sym][k.r][k.c];
+      return key == Key::None ? layout[(int)Layer::Base][k.r][k.c] : key;
   }
 }
 
@@ -239,7 +238,8 @@ void Keymap::update(
       bool pressed = mr->pressed[r] & mask;
       bool released = mr->released[r] & mask;
 
-      auto k = activeKey(r, c);
+      Matrix::Key matrixKey = { .r = r, .c = c };
+      auto k = activeKey(matrixKey);
       switch (k) {
         case Key::None: break;
         default:
