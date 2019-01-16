@@ -7,30 +7,6 @@
 
 class Keymap {
   public:
-    struct Report {
-      uint16_t scancodes[6];
-      uint8_t modifiers;
-    };
-
-    Keymap(void);
-    void update(
-      const Matrix::Report *mr,
-      Report *kr
-    );
-
-  private:
-    enum class Layer {
-      Base,
-      Sym,
-      Count
-    };
-
-    enum class ModState {
-      Off,
-      StickLight,
-      StickHeavy
-    };
-
     enum class Key {
       A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
 
@@ -47,46 +23,39 @@ class Keymap {
 
       Ctrl, Shift, Alt, Sym,
 
+      Count,
       None
     };
 
-    enum class Scancode {
-      A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+    Keymap(void);
+    void update(const Matrix *matrix);
+    bool pressed(const Key k) const;
 
-      Num1, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9, Num0,
+  private:
+    enum class Layer {
+      Base,
+      Sym,
+      Count
+    };
 
-      Enter, Esc, BSpace, Tab, Space, Minus, Equal, LBrace, RBrace, BSlash,
-      Tilde, Semicolon, SQuote, Grave, Comma, Period, Slash,
-
-      F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
-
-      Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
-
-      Count,
-      None
+    enum class ModState {
+      Off,
+      StickLight,
+      StickHeavy
     };
 
     enum class Mod {
-      Ctrl,
-      Shift,
-      Alt,
-      Sym,
-      Count,
-      None
+      Ctrl, Shift, Alt, Sym, Count
     };
 
-    Key activeKey(const Matrix::Key k);
+    Key resolveKey(const Matrix::Key k) const;
+    bool modActive(Mod m) const;
+    Mod keyToMod(Key k) const;
+    ModState nextMod(ModState modState) const;
 
+    bool keysPressed[(int)Key::Count];
     ModState modStates[(int)Mod::Count];
 
-    struct KeyInfo {
-      Scancode scancode : 7;
-      Mod mod : 3;
-    };
-
-    static const uint8_t scancodes[];
-    static const KeyInfo scancodeMap[];
-    static const uint8_t modMap[];
     static const Key layout[][(int)Matrix::Row::Count][(int)Matrix::Col::Count];
 };
 

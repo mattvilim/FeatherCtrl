@@ -20,14 +20,10 @@ class Matrix {
       uint8_t c;
     };
 
-    struct Report {
-      uint16_t pressed[(int)Row::Count];
-      uint16_t released[(int)Col::Count];
-    };
-
     Matrix(void);
     void begin(void);
-    void scan(Report *report);
+    void scan(void);
+    bool pressed(const Key k) const;
 
   private:
     struct KeyState {

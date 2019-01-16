@@ -44,9 +44,7 @@ Matrix::Matrix(void)
   memset(keys, 0, sizeof(keys));
 }
 
-void Matrix::scan(Matrix::Report *report) {
-  memset(report, 0, sizeof(Matrix::Report));
-
+void Matrix::scan(void) {
   auto scanTime = millis();
 
   for (auto c = 0; c < (int)Matrix::Col::Count; c++) {
@@ -63,17 +61,19 @@ void Matrix::scan(Matrix::Report *report) {
 
       if (keyNew.pressed && !keyOld->pressed) {
         *keyOld = keyNew;
-        report->pressed[r] |= 1 << c;
         Serial.println(r);
         Serial.println(c);
       } else if (!pressed && keyOld->pressed) {
         if (keyNew.pressTime - keyOld->pressTime > debounceTime) {
           keyOld->pressed = false;
-          report->released[r] |= 1 << c;
         }
       }
     }
   
     mcp.digitalWrite(colPins[c], HIGH);
   }
+}
+
+bool Matrix::pressed(const Matrix::Key k) const {
+  return keys[k.r][k.c].pressed;
 }
