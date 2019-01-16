@@ -9,8 +9,10 @@ void Keyboard::begin(void) {
 }
 
 void Keyboard::update(void) {
-  matrix.scan();
-  keymap.update(&matrix);
-  hid.sendKeys(&keymap);
+  auto update = matrix.scan();
+  if (update) {
+    keymap.update(&matrix);
+    hid.sendKeys(&keymap);
+  }
 }
 

@@ -22,7 +22,7 @@ class Matrix {
 
     Matrix(void);
     void begin(void);
-    void scan(void);
+    bool scan(void);
     bool pressed(const Key k) const;
 
   private:
