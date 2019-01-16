@@ -80,8 +80,10 @@ void Keymap::update(
 ) {
   memset(&keysPressed, 0, sizeof(keysPressed));
 
-  for (Matrix::Key matrixKey = { .r = 0, .c = 0 }; matrixKey.r < (int)Matrix::Row::Count; matrixKey.r++) {
-    for (; matrixKey.c < (int)Matrix::Col::Count; matrixKey.c++) {
+  Matrix::Key matrixKey;
+  bool nonModifierPressed = false;
+  for (matrixKey.r = 0; matrixKey.r < (int)Matrix::Row::Count; matrixKey.r++) {
+    for (matrixKey.c = 0; matrixKey.c < (int)Matrix::Col::Count; matrixKey.c++) {
       auto key = resolveKey(matrixKey);
       auto wasPressed = keysPressed[(int)key];
       bool isPressed = matrix->pressed(matrixKey);
@@ -100,8 +102,16 @@ void Keymap::update(
           break;
         }
         default:
+          nonModifierPressed = true;
           keysPressed[(int)key] = isPressed;
           break;
+      }
+    }
+  }
+  if (nonModifierPressed) {
+    for (int m = 0; m < (int)Mod::Count; m++) {
+      if (modStates[m] == ModState::StickLight) {
+        modStates[m] = ModState::Off;
       }
     }
   }
