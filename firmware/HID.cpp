@@ -211,33 +211,33 @@ void HID::begin(void) {
 void HID::sendKeys(
   const Keymap *km
 ) {
-  hid_keyboard_report_t newReport = { 0 };
+  auto oldReport = report;
+  memset(&report, 0, sizeof(report));
 
   for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 6; k++) {
     auto key = (Keymap::Key)k;
     auto pressed = km->pressed(key);
     switch (key) {
       case Keymap::Key::Ctrl:
-        newReport.modifier |= 1; break;
+        report.modifier |= 1; break;
       case Keymap::Key::Alt:
-        newReport.modifier |= 1 << 1; break;
+        report.modifier |= 1 << 1; break;
       case Keymap::Key::Shift:
-        newReport.modifier |= 1 << 2; break;
+        report.modifier |= 1 << 2; break;
       case Keymap::Key::Sym: break;
       default: {
         auto info = scancodeMap[(int)key];
         if (pressed) {
-          newReport.keycode[i++] = scancodes[(int)info.scancode];
+          report.keycode[i++] = scancodes[(int)info.scancode];
           if (info.shift) {
-            newReport.modifier |= 1 << 2;
+            report.modifier |= 1 << 2;
           }
         }
       }
     }
   }
 
-  if (memcmp(&report, &newReport, sizeof(report))) {
-    report = newReport;
+  if (memcmp(&report, &oldReport, sizeof(report))) {
     bleHID.keyboardReport(&report);
   }
 }

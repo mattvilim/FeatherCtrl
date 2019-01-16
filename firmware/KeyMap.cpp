@@ -78,6 +78,7 @@ Keymap::Mod Keymap::keyToMod(Keymap::Key k) const {
 void Keymap::update(
   const Matrix *matrix
 ) {
+  auto oldKeysPressed = keysPressed;
   memset(&keysPressed, 0, sizeof(keysPressed));
 
   Matrix::Key matrixKey;
@@ -85,7 +86,7 @@ void Keymap::update(
   for (matrixKey.r = 0; matrixKey.r < (int)Matrix::Row::Count; matrixKey.r++) {
     for (matrixKey.c = 0; matrixKey.c < (int)Matrix::Col::Count; matrixKey.c++) {
       auto key = resolveKey(matrixKey);
-      auto wasPressed = keysPressed[(int)key];
+      auto wasPressed = oldKeysPressed[(int)key];
       bool isPressed = matrix->pressed(matrixKey);
 
       switch (key) {
@@ -108,6 +109,7 @@ void Keymap::update(
       }
     }
   }
+
   if (nonModifierPressed) {
     for (int m = 0; m < (int)Mod::Count; m++) {
       if (modStates[m] == ModState::StickLight) {
