@@ -11,6 +11,6 @@ void Keyboard::begin(void) {
 void Keyboard::update(void) {
   matrix.scan();
   keymap.update(&matrix);
-  hid.sendKeys();
+  hid.sendKeys(&keymap);
 }
 

@@ -9,7 +9,7 @@ class HID {
   public:
     HID(void);
     void begin(void);
-    void sendKeys(void);
+    void sendKeys(const Keymap *km);
   private:
 
     enum class Scancode {
@@ -28,26 +28,18 @@ class HID {
       None
     };
 
-    enum class Mod {
-      Ctrl,
-      Shift,
-      Alt,
-      Count,
-      None
-    };
-
     struct KeyInfo {
       Scancode scancode : 7;
-      Mod mod : 3;
+      bool shift : 1;
     };
 
     BLEHidAdafruit bleHID;
     BLEDis bleDIS;
+    hid_keyboard_report_t report;
 
     static const uint8_t scancodes[];
     static const KeyInfo scancodeMap[];
     static const uint8_t modMap[];
 };
-
 
 #endif

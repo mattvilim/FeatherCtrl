@@ -81,113 +81,102 @@ const uint8_t HID::scancodes[] = {
 };
 
 const HID::KeyInfo HID::scancodeMap[] = {
-  [(int)Keymap::Key::A] = { .scancode = Scancode::A, .mod = Mod::None },
-  [(int)Keymap::Key::B] = { .scancode = Scancode::B, .mod = Mod::None },
-  [(int)Keymap::Key::C] = { .scancode = Scancode::C, .mod = Mod::None },
-  [(int)Keymap::Key::D] = { .scancode = Scancode::D, .mod = Mod::None },
-  [(int)Keymap::Key::E] = { .scancode = Scancode::E, .mod = Mod::None },
-  [(int)Keymap::Key::F] = { .scancode = Scancode::F, .mod = Mod::None },
-  [(int)Keymap::Key::G] = { .scancode = Scancode::G, .mod = Mod::None },
-  [(int)Keymap::Key::H] = { .scancode = Scancode::H, .mod = Mod::None },
-  [(int)Keymap::Key::I] = { .scancode = Scancode::I, .mod = Mod::None },
-  [(int)Keymap::Key::J] = { .scancode = Scancode::J, .mod = Mod::None },
-  [(int)Keymap::Key::K] = { .scancode = Scancode::K, .mod = Mod::None },
-  [(int)Keymap::Key::L] = { .scancode = Scancode::L, .mod = Mod::None },
-  [(int)Keymap::Key::M] = { .scancode = Scancode::M, .mod = Mod::None },
-  [(int)Keymap::Key::N] = { .scancode = Scancode::N, .mod = Mod::None },
-  [(int)Keymap::Key::O] = { .scancode = Scancode::O, .mod = Mod::None },
-  [(int)Keymap::Key::P] = { .scancode = Scancode::P, .mod = Mod::None },
-  [(int)Keymap::Key::Q] = { .scancode = Scancode::Q, .mod = Mod::None },
-  [(int)Keymap::Key::R] = { .scancode = Scancode::R, .mod = Mod::None },
-  [(int)Keymap::Key::S] = { .scancode = Scancode::S, .mod = Mod::None },
-  [(int)Keymap::Key::T] = { .scancode = Scancode::T, .mod = Mod::None },
-  [(int)Keymap::Key::U] = { .scancode = Scancode::U, .mod = Mod::None },
-  [(int)Keymap::Key::V] = { .scancode = Scancode::V, .mod = Mod::None },
-  [(int)Keymap::Key::W] = { .scancode = Scancode::W, .mod = Mod::None },
-  [(int)Keymap::Key::X] = { .scancode = Scancode::X, .mod = Mod::None },
-  [(int)Keymap::Key::Y] = { .scancode = Scancode::Y, .mod = Mod::None },
-  [(int)Keymap::Key::Z] = { .scancode = Scancode::Z, .mod = Mod::None },
+  [(int)Keymap::Key::A] = { .scancode = Scancode::A, .shift = false },
+  [(int)Keymap::Key::B] = { .scancode = Scancode::B, .shift = false },
+  [(int)Keymap::Key::C] = { .scancode = Scancode::C, .shift = false },
+  [(int)Keymap::Key::D] = { .scancode = Scancode::D, .shift = false },
+  [(int)Keymap::Key::E] = { .scancode = Scancode::E, .shift = false },
+  [(int)Keymap::Key::F] = { .scancode = Scancode::F, .shift = false },
+  [(int)Keymap::Key::G] = { .scancode = Scancode::G, .shift = false },
+  [(int)Keymap::Key::H] = { .scancode = Scancode::H, .shift = false },
+  [(int)Keymap::Key::I] = { .scancode = Scancode::I, .shift = false },
+  [(int)Keymap::Key::J] = { .scancode = Scancode::J, .shift = false },
+  [(int)Keymap::Key::K] = { .scancode = Scancode::K, .shift = false },
+  [(int)Keymap::Key::L] = { .scancode = Scancode::L, .shift = false },
+  [(int)Keymap::Key::M] = { .scancode = Scancode::M, .shift = false },
+  [(int)Keymap::Key::N] = { .scancode = Scancode::N, .shift = false },
+  [(int)Keymap::Key::O] = { .scancode = Scancode::O, .shift = false },
+  [(int)Keymap::Key::P] = { .scancode = Scancode::P, .shift = false },
+  [(int)Keymap::Key::Q] = { .scancode = Scancode::Q, .shift = false },
+  [(int)Keymap::Key::R] = { .scancode = Scancode::R, .shift = false },
+  [(int)Keymap::Key::S] = { .scancode = Scancode::S, .shift = false },
+  [(int)Keymap::Key::T] = { .scancode = Scancode::T, .shift = false },
+  [(int)Keymap::Key::U] = { .scancode = Scancode::U, .shift = false },
+  [(int)Keymap::Key::V] = { .scancode = Scancode::V, .shift = false },
+  [(int)Keymap::Key::W] = { .scancode = Scancode::W, .shift = false },
+  [(int)Keymap::Key::X] = { .scancode = Scancode::X, .shift = false },
+  [(int)Keymap::Key::Y] = { .scancode = Scancode::Y, .shift = false },
+  [(int)Keymap::Key::Z] = { .scancode = Scancode::Z, .shift = false },
 
-  [(int)Keymap::Key::Num1] = { .scancode = Scancode::Num1, .mod = Mod::None },
-  [(int)Keymap::Key::Num2] = { .scancode = Scancode::Num2, .mod = Mod::None },
-  [(int)Keymap::Key::Num3] = { .scancode = Scancode::Num3, .mod = Mod::None },
-  [(int)Keymap::Key::Num4] = { .scancode = Scancode::Num4, .mod = Mod::None },
-  [(int)Keymap::Key::Num5] = { .scancode = Scancode::Num5, .mod = Mod::None },
-  [(int)Keymap::Key::Num6] = { .scancode = Scancode::Num6, .mod = Mod::None },
-  [(int)Keymap::Key::Num7] = { .scancode = Scancode::Num7, .mod = Mod::None },
-  [(int)Keymap::Key::Num8] = { .scancode = Scancode::Num8, .mod = Mod::None },
-  [(int)Keymap::Key::Num9] = { .scancode = Scancode::Num9, .mod = Mod::None },
-  [(int)Keymap::Key::Num0] = { .scancode = Scancode::Num0, .mod = Mod::None },
+  [(int)Keymap::Key::Num1] = { .scancode = Scancode::Num1, .shift = false },
+  [(int)Keymap::Key::Num2] = { .scancode = Scancode::Num2, .shift = false },
+  [(int)Keymap::Key::Num3] = { .scancode = Scancode::Num3, .shift = false },
+  [(int)Keymap::Key::Num4] = { .scancode = Scancode::Num4, .shift = false },
+  [(int)Keymap::Key::Num5] = { .scancode = Scancode::Num5, .shift = false },
+  [(int)Keymap::Key::Num6] = { .scancode = Scancode::Num6, .shift = false },
+  [(int)Keymap::Key::Num7] = { .scancode = Scancode::Num7, .shift = false },
+  [(int)Keymap::Key::Num8] = { .scancode = Scancode::Num8, .shift = false },
+  [(int)Keymap::Key::Num9] = { .scancode = Scancode::Num9, .shift = false },
+  [(int)Keymap::Key::Num0] = { .scancode = Scancode::Num0, .shift = false },
 
-  [(int)Keymap::Key::Enter] = { .scancode = Scancode::Enter, .mod = Mod::None },
-  [(int)Keymap::Key::Esc] = { .scancode = Scancode::Esc, .mod = Mod::None },
-  [(int)Keymap::Key::BSpace] = { .scancode = Scancode::BSpace, .mod = Mod::None },
-  [(int)Keymap::Key::Tab] = { .scancode = Scancode::Tab, .mod = Mod::None },
-  [(int)Keymap::Key::Space] = { .scancode = Scancode::Space, .mod = Mod::None },
-  [(int)Keymap::Key::Minus] = { .scancode = Scancode::Minus, .mod = Mod::None },
-  [(int)Keymap::Key::Equal] = { .scancode = Scancode::Equal, .mod = Mod::None },
-  [(int)Keymap::Key::LBrace] = { .scancode = Scancode::LBrace, .mod = Mod::None },
-  [(int)Keymap::Key::RBrace] = { .scancode = Scancode::RBrace, .mod = Mod::None },
-  [(int)Keymap::Key::BSlash] = { .scancode = Scancode::BSlash, .mod = Mod::None },
-  [(int)Keymap::Key::Tilde] = { .scancode = Scancode::Tilde, .mod = Mod::None },
-  [(int)Keymap::Key::Semicolon] = { .scancode = Scancode::Semicolon, .mod = Mod::None },
-  [(int)Keymap::Key::SQuote] = { .scancode = Scancode::SQuote, .mod = Mod::None },
-  [(int)Keymap::Key::Grave] = { .scancode = Scancode::Grave, .mod = Mod::None },
-  [(int)Keymap::Key::Comma] = { .scancode = Scancode::Comma, .mod = Mod::None },
-  [(int)Keymap::Key::Period] = { .scancode = Scancode::Period, .mod = Mod::None },
-  [(int)Keymap::Key::Slash] = { .scancode = Scancode::Slash, .mod = Mod::None },
-  [(int)Keymap::Key::Percent] = { .scancode = Scancode::Num5, .mod = Mod::Shift },
-  [(int)Keymap::Key::At] = { .scancode = Scancode::Num2, .mod = Mod::Shift },
-  [(int)Keymap::Key::LBrack] = { .scancode = Scancode::LBrace, .mod = Mod::Shift },
-  [(int)Keymap::Key::RBrack] = { .scancode = Scancode::RBrace, .mod = Mod::Shift },
-  [(int)Keymap::Key::Carrot] = { .scancode = Scancode::Num6, .mod = Mod::Shift },
-  [(int)Keymap::Key::Pound] = { .scancode = Scancode::Num3, .mod = Mod::Shift },
-  [(int)Keymap::Key::Dollar] = { .scancode = Scancode::Num4, .mod = Mod::Shift },
-  [(int)Keymap::Key::LParen] = { .scancode = Scancode::Num9, .mod = Mod::Shift },
-  [(int)Keymap::Key::RParen] = { .scancode = Scancode::Num0, .mod = Mod::Shift },
-  [(int)Keymap::Key::Asterisk] = { .scancode = Scancode::Num8, .mod = Mod::Shift },
-  [(int)Keymap::Key::Bang] = { .scancode = Scancode::Num1, .mod = Mod::Shift },
-  [(int)Keymap::Key::Plus] = { .scancode = Scancode::Equal, .mod = Mod::Shift },
-  [(int)Keymap::Key::Underscore] = { .scancode = Scancode::Minus, .mod = Mod::Shift },
-  [(int)Keymap::Key::Ampersand] = { .scancode = Scancode::Num7, .mod = Mod::Shift },
-  [(int)Keymap::Key::Pipe] = { .scancode = Scancode::BSlash, .mod = Mod::Shift },
-  [(int)Keymap::Key::Question] = { .scancode = Scancode::Slash, .mod = Mod::Shift },
+  [(int)Keymap::Key::Enter] = { .scancode = Scancode::Enter, .shift = false },
+  [(int)Keymap::Key::Esc] = { .scancode = Scancode::Esc, .shift = false },
+  [(int)Keymap::Key::BSpace] = { .scancode = Scancode::BSpace, .shift = false },
+  [(int)Keymap::Key::Tab] = { .scancode = Scancode::Tab, .shift = false },
+  [(int)Keymap::Key::Space] = { .scancode = Scancode::Space, .shift = false },
+  [(int)Keymap::Key::Minus] = { .scancode = Scancode::Minus, .shift = false },
+  [(int)Keymap::Key::Equal] = { .scancode = Scancode::Equal, .shift = false },
+  [(int)Keymap::Key::LBrace] = { .scancode = Scancode::LBrace, .shift = false },
+  [(int)Keymap::Key::RBrace] = { .scancode = Scancode::RBrace, .shift = false },
+  [(int)Keymap::Key::BSlash] = { .scancode = Scancode::BSlash, .shift = false },
+  [(int)Keymap::Key::Tilde] = { .scancode = Scancode::Tilde, .shift = false },
+  [(int)Keymap::Key::Semicolon] = { .scancode = Scancode::Semicolon, .shift = false },
+  [(int)Keymap::Key::SQuote] = { .scancode = Scancode::SQuote, .shift = false },
+  [(int)Keymap::Key::Grave] = { .scancode = Scancode::Grave, .shift = false },
+  [(int)Keymap::Key::Comma] = { .scancode = Scancode::Comma, .shift = false },
+  [(int)Keymap::Key::Period] = { .scancode = Scancode::Period, .shift = false },
+  [(int)Keymap::Key::Slash] = { .scancode = Scancode::Slash, .shift = false },
+  [(int)Keymap::Key::Percent] = { .scancode = Scancode::Num5, .shift = true },
+  [(int)Keymap::Key::At] = { .scancode = Scancode::Num2, .shift = true },
+  [(int)Keymap::Key::LBrack] = { .scancode = Scancode::LBrace, .shift = true },
+  [(int)Keymap::Key::RBrack] = { .scancode = Scancode::RBrace, .shift = true },
+  [(int)Keymap::Key::Carrot] = { .scancode = Scancode::Num6, .shift = true },
+  [(int)Keymap::Key::Pound] = { .scancode = Scancode::Num3, .shift = true },
+  [(int)Keymap::Key::Dollar] = { .scancode = Scancode::Num4, .shift = true },
+  [(int)Keymap::Key::LParen] = { .scancode = Scancode::Num9, .shift = true },
+  [(int)Keymap::Key::RParen] = { .scancode = Scancode::Num0, .shift = true },
+  [(int)Keymap::Key::Asterisk] = { .scancode = Scancode::Num8, .shift = true },
+  [(int)Keymap::Key::Bang] = { .scancode = Scancode::Num1, .shift = true },
+  [(int)Keymap::Key::Plus] = { .scancode = Scancode::Equal, .shift = true },
+  [(int)Keymap::Key::Underscore] = { .scancode = Scancode::Minus, .shift = true },
+  [(int)Keymap::Key::Ampersand] = { .scancode = Scancode::Num7, .shift = true },
+  [(int)Keymap::Key::Pipe] = { .scancode = Scancode::BSlash, .shift = true },
+  [(int)Keymap::Key::Question] = { .scancode = Scancode::Slash, .shift = true },
 
-  [(int)Keymap::Key::F1] = { .scancode = Scancode::F1, .mod = Mod::None },
-  [(int)Keymap::Key::F2] = { .scancode = Scancode::F2, .mod = Mod::None },
-  [(int)Keymap::Key::F3] = { .scancode = Scancode::F3, .mod = Mod::None },
-  [(int)Keymap::Key::F4] = { .scancode = Scancode::F4, .mod = Mod::None },
-  [(int)Keymap::Key::F5] = { .scancode = Scancode::F5, .mod = Mod::None },
-  [(int)Keymap::Key::F6] = { .scancode = Scancode::F6, .mod = Mod::None },
-  [(int)Keymap::Key::F7] = { .scancode = Scancode::F7, .mod = Mod::None },
-  [(int)Keymap::Key::F8] = { .scancode = Scancode::F8, .mod = Mod::None },
-  [(int)Keymap::Key::F9] = { .scancode = Scancode::F9, .mod = Mod::None },
-  [(int)Keymap::Key::F10] = { .scancode = Scancode::F10, .mod = Mod::None },
-  [(int)Keymap::Key::F11] = { .scancode = Scancode::F11, .mod = Mod::None },
-  [(int)Keymap::Key::F12] = { .scancode = Scancode::F12, .mod = Mod::None },
-  [(int)Keymap::Key::PrintScr] = { .scancode = Scancode::None, .mod = Mod::None },
-  [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::None, .mod = Mod::None },
-  [(int)Keymap::Key::Pause] = { .scancode = Scancode::None, .mod = Mod::None },
-  [(int)Keymap::Key::Home] = { .scancode = Scancode::Home, .mod = Mod::None },
-  [(int)Keymap::Key::PgUp] = { .scancode = Scancode::PgUp, .mod = Mod::None },
-  [(int)Keymap::Key::Del] = { .scancode = Scancode::Del, .mod = Mod::None },
-  [(int)Keymap::Key::End] = { .scancode = Scancode::End, .mod = Mod::None },
-  [(int)Keymap::Key::PgDn] = { .scancode = Scancode::PgDn, .mod = Mod::None },
-  [(int)Keymap::Key::Right] = { .scancode = Scancode::Right, .mod = Mod::None },
-  [(int)Keymap::Key::Left] = { .scancode = Scancode::Left, .mod = Mod::None },
-  [(int)Keymap::Key::Down] = { .scancode = Scancode::Down, .mod = Mod::None },
-  [(int)Keymap::Key::Up] = { .scancode = Scancode::Up, .mod = Mod::None },
-
-  [(int)Keymap::Key::Ctrl] = { .scancode = Scancode::None, .mod = Mod::Ctrl },
-  [(int)Keymap::Key::Shift] = { .scancode = Scancode::None, .mod = Mod::Shift },
-  [(int)Keymap::Key::Alt] = { .scancode = Scancode::None, .mod = Mod::Alt },
-  [(int)Keymap::Key::Sym] = { .scancode = Scancode::None, .mod = Mod::None }
-};
-
-const uint8_t HID::modMap[] = {
-  [(int)Mod::Ctrl] = 1 << 0,
-  [(int)Mod::Shift] = 1 << 1,
-  [(int)Mod::Alt] = 1 << 2
+  [(int)Keymap::Key::F1] = { .scancode = Scancode::F1, .shift = false },
+  [(int)Keymap::Key::F2] = { .scancode = Scancode::F2, .shift = false },
+  [(int)Keymap::Key::F3] = { .scancode = Scancode::F3, .shift = false },
+  [(int)Keymap::Key::F4] = { .scancode = Scancode::F4, .shift = false },
+  [(int)Keymap::Key::F5] = { .scancode = Scancode::F5, .shift = false },
+  [(int)Keymap::Key::F6] = { .scancode = Scancode::F6, .shift = false },
+  [(int)Keymap::Key::F7] = { .scancode = Scancode::F7, .shift = false },
+  [(int)Keymap::Key::F8] = { .scancode = Scancode::F8, .shift = false },
+  [(int)Keymap::Key::F9] = { .scancode = Scancode::F9, .shift = false },
+  [(int)Keymap::Key::F10] = { .scancode = Scancode::F10, .shift = false },
+  [(int)Keymap::Key::F11] = { .scancode = Scancode::F11, .shift = false },
+  [(int)Keymap::Key::F12] = { .scancode = Scancode::F12, .shift = false },
+  [(int)Keymap::Key::PrintScr] = { .scancode = Scancode::None, .shift = false },
+  [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::None, .shift = false },
+  [(int)Keymap::Key::Pause] = { .scancode = Scancode::None, .shift = false },
+  [(int)Keymap::Key::Home] = { .scancode = Scancode::Home, .shift = false },
+  [(int)Keymap::Key::PgUp] = { .scancode = Scancode::PgUp, .shift = false },
+  [(int)Keymap::Key::Del] = { .scancode = Scancode::Del, .shift = false },
+  [(int)Keymap::Key::End] = { .scancode = Scancode::End, .shift = false },
+  [(int)Keymap::Key::PgDn] = { .scancode = Scancode::PgDn, .shift = false },
+  [(int)Keymap::Key::Right] = { .scancode = Scancode::Right, .shift = false },
+  [(int)Keymap::Key::Left] = { .scancode = Scancode::Left, .shift = false },
+  [(int)Keymap::Key::Down] = { .scancode = Scancode::Down, .shift = false },
+  [(int)Keymap::Key::Up] = { .scancode = Scancode::Up, .shift = false },
 };
 
 HID::HID(void) {
@@ -219,6 +208,34 @@ void HID::begin(void) {
   Bluefruit.Advertising.start(0);
 }
 
-void HID::sendKeys(void) {
+void HID::sendKeys(
+  const Keymap *km
+) {
+  memset(&report, 0, sizeof(report));
+
+  for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 6; k++) {
+    auto key = (Keymap::Key)k;
+    auto pressed = km->pressed(key);
+    switch (key) {
+      case Keymap::Key::Ctrl:
+        report.modifier |= 1; break;
+      case Keymap::Key::Alt:
+        report.modifier |= 1 << 1; break;
+      case Keymap::Key::Shift:
+        report.modifier |= 1 << 2; break;
+      case Keymap::Key::Sym: break;
+      default: {
+        auto info = scancodeMap[(int)key];
+        if (pressed) {
+          report.keycode[i++] = scancodes[(int)info.scancode];
+          if (info.shift) {
+            report.modifier |= 1 << 2;
+          }
+        }
+      }
+    }
+  }
+
+  bleHID.keyboardReport(&report);
 }
 
