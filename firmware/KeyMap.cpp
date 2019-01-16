@@ -1,6 +1,5 @@
 #include "KeyMap.h"
 
-
 const Keymap::Key Keymap::layout[][(int)Matrix::Row::Count][(int)Matrix::Col::Count] = {
   [(int)Layer::Base] = {
     { Key::None, Key::Num9, Key::Num7, Key::Num5, Key::Num3, Key::Num1, Key::Num0, Key::Num2, Key::Num4, Key::Num6, Key::Num8, Key::None },
@@ -41,7 +40,7 @@ Keymap::Key Keymap::resolveKey(
   }
 }
 
-Keymap::ModState Keymap::nextMod(Keymap::ModState modState) const {
+Keymap::ModState Keymap::nextModState(Keymap::ModState modState) const {
   switch (modState) {
     case ModState::Off:
       return ModState::StickLight;
@@ -83,25 +82,25 @@ void Keymap::update(
 
   for (Matrix::Key matrixKey = { .r = 0, .c = 0 }; matrixKey.r < (int)Matrix::Row::Count; matrixKey.r++) {
     for (; matrixKey.c < (int)Matrix::Col::Count; matrixKey.c++) {
-      auto keymapKey = resolveKey(matrixKey);
-      auto wasPressed = keysPressed[(int)keymapKey];
+      auto key = resolveKey(matrixKey);
+      auto wasPressed = keysPressed[(int)key];
       bool isPressed = matrix->pressed(matrixKey);
 
-      switch (keymapKey) {
+      switch (key) {
         case Key::None: break;
         case Key::Ctrl:
         case Key::Alt:
         case Key::Shift:
         case Key::Sym: {
-          auto m = keyToMod(keymapKey);
+          auto m = keyToMod(key);
           if (isPressed && !wasPressed) {
-            modStates[(int)m] = nextMod(modStates[(int)m]);
+            modStates[(int)m] = nextModState(modStates[(int)m]);
           }
-          keysPressed[(int)keymapKey] = modActive(m);
+          keysPressed[(int)key] = modActive(m);
           break;
         }
         default:
-          keysPressed[(int)keymapKey] = isPressed;
+          keysPressed[(int)key] = isPressed;
           break;
       }
     }

@@ -51,7 +51,7 @@ class Keymap {
     Key resolveKey(const Matrix::Key k) const;
     bool modActive(Mod m) const;
     Mod keyToMod(Key k) const;
-    ModState nextMod(ModState modState) const;
+    ModState nextModState(ModState modState) const;
 
     bool keysPressed[(int)Key::Count];
     ModState modStates[(int)Mod::Count];
