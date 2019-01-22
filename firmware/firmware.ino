@@ -4,10 +4,10 @@
 Keyboard keyboard;
 
 void setup(void) {
-  keyboard.begin();
 #if DEBUG
   Serial.begin(9600);
 #endif
+  keyboard.begin();
 }
 
 void loop(void) {

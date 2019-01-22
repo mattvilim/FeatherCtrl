@@ -179,7 +179,9 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Up] = { .scancode = Scancode::Up, .shift = false },
 };
 
-HID::HID(void) {
+HID::HID(void)
+  : bleDIS(), bleHID() {
+  memset(&report, 0, sizeof(report));
 }
 
 void HID::begin(void) {
@@ -217,6 +219,8 @@ void HID::sendKeys(
   for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 6; k++) {
     auto key = (Keymap::Key)k;
     auto pressed = km->pressed(key);
+    if (!pressed) continue;
+
     switch (key) {
       case Keymap::Key::Ctrl:
         report.modifier |= 1; break;
@@ -227,11 +231,9 @@ void HID::sendKeys(
       case Keymap::Key::Sym: break;
       default: {
         auto info = scancodeMap[(int)key];
-        if (pressed) {
-          report.keycode[i++] = scancodes[(int)info.scancode];
-          if (info.shift) {
-            report.modifier |= 1 << 2;
-          }
+        report.keycode[i++] = scancodes[(int)info.scancode];
+        if (info.shift) {
+          report.modifier |= 1 << 2;
         }
       }
     }

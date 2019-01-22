@@ -1,6 +1,6 @@
 #include "KeyMap.h"
 
-const Keymap::Key Keymap::layout[][(int)Matrix::Row::Count][(int)Matrix::Col::Count] = {
+const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
   [(int)Layer::Base] = {
     { Key::None, Key::Num9, Key::Num7, Key::Num5, Key::Num3, Key::Num1, Key::Num0, Key::Num2, Key::Num4, Key::Num6, Key::Num8, Key::None },
     { Key::None, Key::SQuote, Key::Comma, Key::Period, Key::P, Key::Y, Key::F, Key::G, Key::C, Key::R, Key::L, Key::None },
@@ -22,6 +22,8 @@ const Keymap::Key Keymap::layout[][(int)Matrix::Row::Count][(int)Matrix::Col::Co
 };
 
 Keymap::Keymap(void) {
+  memset(&keysPressed, 0, sizeof(keysPressed));
+
   for (int m = 0; m < (int)Mod::Count; m++) {
     modStates[m] = ModState::Off;
   }
@@ -83,8 +85,8 @@ void Keymap::update(
 
   Matrix::Key matrixKey;
   bool nonModifierPressed = false;
-  for (matrixKey.r = 0; matrixKey.r < (int)Matrix::Row::Count; matrixKey.r++) {
-    for (matrixKey.c = 0; matrixKey.c < (int)Matrix::Col::Count; matrixKey.c++) {
+  for (matrixKey.r = 0; matrixKey.r < (int)Matrix::Dim::Row; matrixKey.r++) {
+    for (matrixKey.c = 0; matrixKey.c < (int)Matrix::Dim::Col; matrixKey.c++) {
       auto key = resolveKey(matrixKey);
       auto wasPressed = oldKeysPressed[(int)key];
       bool isPressed = matrix->pressed(matrixKey);

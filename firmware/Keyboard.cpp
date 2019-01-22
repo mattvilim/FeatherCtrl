@@ -1,11 +1,11 @@
 #include "Keyboard.h"
 
 Keyboard::Keyboard(void)
-: matrix(), keymap() {}
+: matrix(), keymap(), hid() {}
 
 void Keyboard::begin(void) {
-  matrix.begin();
   hid.begin();
+  matrix.begin();
 }
 
 void Keyboard::update(void) {
