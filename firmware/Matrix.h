@@ -3,8 +3,6 @@
 
 #include <stdint.h>
 
-#include "MCP23S17.h"
-
 class Matrix {
   public:
     enum class Dim {
@@ -28,7 +26,6 @@ class Matrix {
       bool pressed;
     };
 
-    MCP mcp;
     KeyState keys[(int)Dim::Row][(int)Dim::Col];
 
     static const uint8_t rowPins[];

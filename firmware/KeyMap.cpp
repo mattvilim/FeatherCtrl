@@ -1,5 +1,7 @@
 #include "KeyMap.h"
 
+#include <Arduino.h>
+
 const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
   [(int)Layer::Base] = {
     { Key::None, Key::Num9, Key::Num7, Key::Num5, Key::Num3, Key::Num1, Key::Num0, Key::Num2, Key::Num4, Key::Num6, Key::Num8, Key::None },

@@ -1,5 +1,7 @@
 #include "HID.h"
 
+#include <Arduino.h>
+
 const uint8_t HID::scancodes[] = {
   [(int)Scancode::A] = 0x4,
   [(int)Scancode::B] = 0x5,

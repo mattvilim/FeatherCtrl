@@ -1,24 +1,23 @@
 #include "Matrix.h"
 
+#include <Arduino.h>
+
 const uint8_t Matrix::rowPins[] = {
-  4, 3, 2, 16, 15, 7, 11
+  4, 5, 28, 29, 13, 26, 25
 };
 
 const uint8_t Matrix::colPins[] = {
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+  27, 30, 11, 7, 15, 16, 6, 14, 8, 3, 2, 12
 };
 
-Matrix::Matrix(void)
-  : mcp(0, 27) {
+Matrix::Matrix(void) {
   memset(keys, 0, sizeof(keys));
 }
 
 void Matrix::begin(void) {
-  mcp.begin();
-
   for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
-      mcp.pinMode(colPins[c], OUTPUT);
-      mcp.digitalWrite(colPins[c], HIGH);
+      pinMode(colPins[c], OUTPUT);
+      digitalWrite(colPins[c], HIGH);
   }
 
   for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
@@ -34,7 +33,7 @@ bool Matrix::scan(void) {
 
   for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
   
-    mcp.digitalWrite(colPins[c], LOW);
+    digitalWrite(colPins[c], LOW);
   
     delayMicroseconds(30);
   
@@ -57,7 +56,7 @@ bool Matrix::scan(void) {
       }
     }
   
-    mcp.digitalWrite(colPins[c], HIGH);
+    digitalWrite(colPins[c], HIGH);
   }
 
   return update;
