@@ -1,9 +1,8 @@
 all: compile
 
 compile:
-	arduino-cli compile --fqbn adafruit:nrf52:feather52832 -o firmware.hex
+	mkdir bin -p
+	arduino-cli compile $(shell pwd)/src/firmware.ino -b adafruit:nrf52:feather52840 -o $(shell pwd)/bin/firmware.ino --build-path $(shell pwd)/bin
 
 flash:
-	adafruit-nrfutil dfu genpkg --dev-type 0x0052 --application firmware.hex firmware.zip
-	adafruit-nrfutil dfu serial --package firmware.zip -p /dev/ttyUSB0 -b 115200
-
+	arduino-cli upload -i $(shell pwd)/bin/firmware.ino.hex -p /dev/ttyACM0 -b adafruit:nrf52:feather52840

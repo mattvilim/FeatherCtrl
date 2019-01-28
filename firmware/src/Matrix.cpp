@@ -46,8 +46,8 @@ bool Matrix::scan(void) {
       if (keyNew.pressed && !keyOld->pressed) {
         *keyOld = keyNew;
         update = true;
-        Serial.print(r);
-        Serial.print(c);
+        //Serial.print(r);
+        //Serial.print(c);
       } else if (!keyNew.pressed && keyOld->pressed) {
         if (keyNew.pressTime - keyOld->pressTime > debounceTime) {
           keyOld->pressed = false;
