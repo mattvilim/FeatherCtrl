@@ -3,11 +3,11 @@
 #include <Arduino.h>
 
 const uint8_t Matrix::rowPins[] = {
-  4, 5, 28, 29, 13, 26, 25
+  PIN_A2, PIN_A3, PIN_A4, PIN_A5, PIN_SPI_MOSI, PIN_WIRE_SCL, PIN_WIRE_SDA
 };
 
 const uint8_t Matrix::colPins[] = {
-  27, 30, 11, 7, 15, 16, 6, 14, 8, 3, 2, 12
+  27, PIN_A6, 11, 7, 15, 16, PIN_SERIAL_RX, PIN_SPI_MISO, PIN_SERIAL_TX, PIN_A1, PIN_A0, PIN_SPI_SCK
 };
 
 Matrix::Matrix(void) {
