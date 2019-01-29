@@ -7,7 +7,7 @@ const uint8_t Matrix::rowPins[] = {
 };
 
 const uint8_t Matrix::colPins[] = {
-  27, PIN_A6, 11, 7, 15, 16, PIN_SERIAL_RX, PIN_SPI_MISO, PIN_SERIAL_TX, PIN_A1, PIN_A0, PIN_SPI_SCK
+  5, 6, 10, 11, 12, 13, PIN_SERIAL_RX, PIN_SPI_MISO, PIN_SERIAL_TX, PIN_A1, PIN_A0, PIN_SPI_SCK
 };
 
 Matrix::Matrix(void) {
