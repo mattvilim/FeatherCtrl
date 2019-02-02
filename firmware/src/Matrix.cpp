@@ -16,13 +16,12 @@ Matrix::Matrix(void) {
 
 void Matrix::begin(void) {
   for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
-      pinMode(colPins[c], OUTPUT);
-      digitalWrite(colPins[c], HIGH);
+    pinMode(colPins[c], OUTPUT);
+    digitalWrite(colPins[c], HIGH);
   }
 
   for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
-      pinMode(rowPins[r], INPUT_PULLUP);
-      digitalWrite(rowPins[r], HIGH);
+    pinMode(rowPins[r], INPUT_PULLUP);
   }
 }
 
@@ -35,8 +34,6 @@ bool Matrix::scan(void) {
   
     digitalWrite(colPins[c], LOW);
   
-    delayMicroseconds(30);
-  
     for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
       auto pressed = digitalRead(rowPins[r]) == LOW;
 
@@ -46,8 +43,6 @@ bool Matrix::scan(void) {
       if (keyNew.pressed && !keyOld->pressed) {
         *keyOld = keyNew;
         update = true;
-        //Serial.print(r);
-        //Serial.print(c);
       } else if (!keyNew.pressed && keyOld->pressed) {
         if (keyNew.pressTime - keyOld->pressTime > debounceTime) {
           keyOld->pressed = false;
@@ -64,4 +59,14 @@ bool Matrix::scan(void) {
 
 bool Matrix::pressed(const Matrix::Key k) const {
   return keys[k.r][k.c].pressed;
+}
+
+void Matrix::sleep(void) {
+  for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
+    digitalWrite(colPins[c], LOW);
+  }
+
+  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
+    nrf_gpio_cfg_sense_input(g_ADigitalPinMap[rowPins[r]], NRF_GPIO_PIN_PULLUP, NRF_GPIO_PIN_SENSE_LOW);
+  }
 }

@@ -19,10 +19,11 @@ class Matrix {
     void begin(void);
     bool scan(void);
     bool pressed(const Key k) const;
+    void sleep(void);
 
   private:
     struct KeyState {
-      uint8_t pressTime;
+      uint32_t pressTime;
       bool pressed;
     };
 

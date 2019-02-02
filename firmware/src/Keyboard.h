@@ -10,11 +10,15 @@ class Keyboard {
     Keyboard(void);
     void begin(void);
     void update(void);
+    void sleepCheck(void);
 
   private:
     Matrix matrix;
     Keymap keymap;
     HID hid;
+    unsigned long idleTime;
+
+    static const uint8_t sleepMinutes = 10;
 };
 
 
