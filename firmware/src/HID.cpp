@@ -82,6 +82,12 @@ const uint8_t HID::scancodes[] = {
   [(int)Scancode::Up] = 0x52
 };
 
+const uint8_t HID::modifers[] = {
+  [(int)Mod::Ctrl] = 1 << 0,
+  [(int)Mod::Alt] = 1 << 2,
+  [(int)Mod::Shift] = 1 << 1
+};
+
 const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::A] = { .scancode = Scancode::A, .shift = false },
   [(int)Keymap::Key::B] = { .scancode = Scancode::B, .shift = false },
@@ -225,17 +231,17 @@ void HID::sendKeys(
 
     switch (key) {
       case Keymap::Key::Ctrl:
-        report.modifier |= 1; break;
+        report.modifier |= modifers[(int)HID::Mod::Ctrl]; break;
       case Keymap::Key::Alt:
-        report.modifier |= 1 << 1; break;
+        report.modifier |= modifers[(int)HID::Mod::Alt]; break;
       case Keymap::Key::Shift:
-        report.modifier |= 1 << 2; break;
+        report.modifier |= modifers[(int)HID::Mod::Shift]; break;
       case Keymap::Key::Sym: break;
       default: {
         auto info = scancodeMap[(int)key];
         report.keycode[i++] = scancodes[(int)info.scancode];
         if (info.shift) {
-          report.modifier |= 1 << 2;
+          report.modifier |= 1 << 1;
         }
       }
     }

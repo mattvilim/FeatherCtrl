@@ -28,6 +28,10 @@ class HID {
       None
     };
 
+    enum class Mod {
+      Ctrl, Alt, Shift
+    };
+
     struct KeyInfo {
       Scancode scancode : 7;
       bool shift : 1;
@@ -38,6 +42,7 @@ class HID {
     hid_keyboard_report_t report;
 
     static const uint8_t scancodes[];
+    static const uint8_t modifers[];
     static const KeyInfo scancodeMap[];
     static const uint8_t modMap[];
 };

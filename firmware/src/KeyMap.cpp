@@ -7,7 +7,7 @@ const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col]
     { Key::None, Key::Num9, Key::Num7, Key::Num5, Key::Num3, Key::Num1, Key::Num0, Key::Num2, Key::Num4, Key::Num6, Key::Num8, Key::None },
     { Key::None, Key::SQuote, Key::Comma, Key::Period, Key::P, Key::Y, Key::F, Key::G, Key::C, Key::R, Key::L, Key::None },
     { Key::None, Key::A, Key::O, Key::E, Key::U, Key::I, Key::D, Key::H, Key::T, Key::N, Key::S, Key::None },
-    { Key::None, Key::Semicolon, Key::Q, Key::J, Key::K, Key::X, Key::B, Key::M, Key::W, Key::V, Key::Z, Key::None },
+    { Key::Shift, Key::Semicolon, Key::Q, Key::J, Key::K, Key::X, Key::B, Key::M, Key::W, Key::V, Key::Z, Key::Shift },
     { Key::None, Key::None, Key::Alt, Key::Sym, Key::None, Key::Ctrl, Key::Ctrl, Key::None, Key::Sym, Key::Alt, Key::None, Key::None },
     { Key::None, Key::None, Key::None, Key::None, Key::None, Key::None, Key::Space, Key::BSpace, Key::None, Key::None, Key::None, Key::None },
     { Key::None, Key::None, Key::None, Key::Enter, Key::Esc, Key::None, Key::None, Key::None, Key::None, Key::None, Key::None, Key::None }
@@ -85,10 +85,10 @@ void Keymap::update(
   auto oldKeysPressed = keysPressed;
   memset(&keysPressed, 0, sizeof(keysPressed));
 
-  Matrix::Key matrixKey;
   bool nonModifierPressed = false;
-  for (matrixKey.r = 0; matrixKey.r < (int)Matrix::Dim::Row; matrixKey.r++) {
-    for (matrixKey.c = 0; matrixKey.c < (int)Matrix::Dim::Col; matrixKey.c++) {
+  for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
+    for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
+      Matrix::Key matrixKey = { .r = r, .c = c };
       auto key = resolveKey(matrixKey);
       auto wasPressed = oldKeysPressed[(int)key];
       bool isPressed = matrix->pressed(matrixKey);
@@ -107,7 +107,7 @@ void Keymap::update(
           break;
         }
         default:
-          nonModifierPressed = true;
+          nonModifierPressed = nonModifierPressed || isPressed;
           keysPressed[(int)key] = isPressed;
           break;
       }
