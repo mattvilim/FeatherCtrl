@@ -54,6 +54,7 @@ class Keymap {
     ModState nextModState(ModState modState) const;
 
     bool keysPressed[(int)Key::Count];
+    bool matrixPressed[(int)Matrix::Dim::Row][(int)Matrix::Dim::Col];
     ModState modStates[(int)Mod::Count];
 
     static const Key layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col];

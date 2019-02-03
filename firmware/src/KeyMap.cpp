@@ -25,6 +25,7 @@ const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col]
 
 Keymap::Keymap(void) {
   memset(&keysPressed, 0, sizeof(keysPressed));
+  memset(&matrixPressed, 0, sizeof(matrixPressed));
 
   for (int m = 0; m < (int)Mod::Count; m++) {
     modStates[m] = ModState::Off;
@@ -83,15 +84,16 @@ void Keymap::update(
   const Matrix *matrix
 ) {
   auto oldKeysPressed = keysPressed;
-  memset(&keysPressed, 0, sizeof(keysPressed));
+  auto oldMatrixPressed = matrixPressed;
 
   bool nonModifierPressed = false;
   for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
     for (auto c = 0; c < (int)Matrix::Dim::Col; c++) {
       Matrix::Key matrixKey = { .r = r, .c = c };
       auto key = resolveKey(matrixKey);
-      auto wasPressed = oldKeysPressed[(int)key];
+      auto wasPressed = oldMatrixPressed[r][c];
       bool isPressed = matrix->pressed(matrixKey);
+      matrixPressed[r][c] = isPressed;
 
       switch (key) {
         case Key::None: break;
