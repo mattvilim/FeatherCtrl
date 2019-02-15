@@ -703,16 +703,9 @@ design rules under a new name.</description>
 <wire x1="31.75" y1="53.975" x2="17.78" y2="53.975" width="0.254" layer="16"/>
 </signal>
 <signal name="COL_J">
-<wire x1="2.54" y1="75.565" x2="3.7" y2="76.725" width="0.254" layer="1"/>
-<wire x1="2.54" y1="75.565" x2="2.54" y2="55.245" width="0.254" layer="1"/>
-<wire x1="2.54" y1="55.245" x2="3.81" y2="53.975" width="0.254" layer="1"/>
 <contactref element="U$1" pad="6"/>
 <contactref element="U$4" pad="P$2"/>
-<wire x1="3.7" y1="76.725" x2="6.63" y2="76.725" width="0.254" layer="1"/>
-<wire x1="6.65" y1="76.745" x2="6.63" y2="76.725" width="0.254" layer="1"/>
 <contactref element="U$7" pad="P$8"/>
-<wire x1="12.97" y1="53.975" x2="15.21" y2="51.735" width="0.254" layer="1"/>
-<wire x1="3.81" y1="53.975" x2="12.97" y2="53.975" width="0.254" layer="1"/>
 <wire x1="57.15" y1="19.05" x2="43.18" y2="33.02" width="0.254" layer="16"/>
 <wire x1="36.195" y1="58.42" x2="17.78" y2="58.42" width="0.254" layer="16"/>
 <wire x1="17.78" y1="58.42" x2="12.7" y2="63.5" width="0.254" layer="16"/>
@@ -720,6 +713,13 @@ design rules under a new name.</description>
 <wire x1="43.18" y1="33.02" x2="43.18" y2="51.435" width="0.254" layer="16"/>
 <wire x1="43.18" y1="51.435" x2="36.195" y2="58.42" width="0.254" layer="16"/>
 <wire x1="12.7" y1="63.5" x2="12.7" y2="70.695" width="0.254" layer="16"/>
+<wire x1="6.65" y1="76.745" x2="4.355" y2="76.745" width="0.254" layer="1"/>
+<wire x1="4.355" y1="76.745" x2="3.81" y2="76.2" width="0.254" layer="1"/>
+<wire x1="3.81" y1="76.2" x2="3.81" y2="62.23" width="0.254" layer="1"/>
+<wire x1="5.715" y1="60.325" x2="10.16" y2="60.325" width="0.254" layer="1"/>
+<wire x1="10.16" y1="60.325" x2="15.21" y2="55.275" width="0.254" layer="1"/>
+<wire x1="15.21" y1="55.275" x2="15.21" y2="51.735" width="0.254" layer="1"/>
+<wire x1="3.81" y1="62.23" x2="5.715" y2="60.325" width="0.254" layer="1"/>
 </signal>
 <signal name="COL_K">
 <contactref element="U$4" pad="P$1"/>
