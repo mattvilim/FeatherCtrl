@@ -787,42 +787,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </nets>
 </sheet>
 </sheets>
-<errors>
-<approved hash="104,1,83.82,43.18,U$1,3V,3V1,,,"/>
-<approved hash="104,1,83.82,40.64,U$1,3V,3V2,,,"/>
-<approved hash="103,1,127,33.02,U$1,EN,EN,,,"/>
-<approved hash="204,1,127,35.56,U$1,VBAT,,,,"/>
-<approved hash="104,1,17.78,48.26,IC2,VDD,3V1,,,"/>
-<approved hash="104,1,17.78,7.62,IC2,VSS,GND,,,"/>
-<approved hash="106,1,167.64,38.1,N$2,,,,,"/>
-<approved hash="106,1,167.64,40.64,N$3,,,,,"/>
-<approved hash="106,1,167.64,48.26,N$6,,,,,"/>
-<approved hash="106,1,170.18,-2.54,N$19,,,,,"/>
-<approved hash="106,1,43.18,7.62,N$21,,,,,"/>
-<approved hash="106,1,170.18,-15.24,N$24,,,,,"/>
-<approved hash="106,1,-35.56,40.64,N$39,,,,,"/>
-<approved hash="106,1,-35.56,38.1,N$40,,,,,"/>
-<approved hash="106,1,-35.56,-5.08,N$44,,,,,"/>
-<approved hash="106,1,-35.56,-20.32,N$50,,,,,"/>
-<approved hash="106,1,15.24,-53.34,N$54,,,,,"/>
-<approved hash="106,1,20.32,-53.34,N$55,,,,,"/>
-<approved hash="106,1,17.78,-53.34,N$56,,,,,"/>
-<approved hash="106,1,22.86,-53.34,N$57,,,,,"/>
-<approved hash="106,1,25.4,-53.34,N$58,,,,,"/>
-<approved hash="106,1,30.48,-53.34,N$60,,,,,"/>
-<approved hash="106,1,33.02,-53.34,N$61,,,,,"/>
-<approved hash="106,1,81.28,-33.02,N$67,,,,,"/>
-<approved hash="106,1,83.82,-33.02,N$68,,,,,"/>
-<approved hash="106,1,101.6,-33.02,N$75,,,,,"/>
-<approved hash="106,1,104.14,-33.02,N$76,,,,,"/>
-<approved hash="106,1,106.68,-33.02,N$77,,,,,"/>
-<approved hash="106,1,109.22,-33.02,N$78,,,,,"/>
-<approved hash="106,1,111.76,-33.02,N$79,,,,,"/>
-<approved hash="113,1,137.482,-57.15,LED1,,,,,"/>
-<approved hash="113,1,147.642,-57.15,LED2,,,,,"/>
-<approved hash="113,1,157.802,-57.15,LED3,,,,,"/>
-<approved hash="113,1,167.962,-57.15,LED4,,,,,"/>
-</errors>
 </schematic>
 </drawing>
 </eagle>
