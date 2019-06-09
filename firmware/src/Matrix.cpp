@@ -25,6 +25,50 @@ void Matrix::begin(void) {
   }
 }
 
+
+bool Matrix::updateState(const int row, const int col, const bool pressed) {
+
+  KeyState *state = &(keys[row][col]);
+  auto scanTime = millis();
+  bool bouncing = (scanTime - state->pressTime) < debounceTime;
+
+  switch (state->status) {
+    case KeyStatus::NOT_PRESSED:
+    if (!pressed) {
+      return false;
+    }
+    // state transition from not pressed to pressed
+    state->status = KeyStatus::PRESSED_BOUNCING;
+    state->pressTime = scanTime;
+    return true;
+
+    case KeyStatus::PRESSED_BOUNCING:
+      if (bouncing) {
+        return false;
+      }
+      state->status = KeyStatus::PRESSED;
+      return false;
+
+    case KeyStatus::PRESSED:
+    if (pressed) {
+      return false;
+    }
+    // state transition from pressed to not pressed
+    state->status = KeyStatus::RELEASING_BOUNCING;
+    state->pressTime = scanTime;
+    return true;
+
+    case KeyStatus::RELEASING_BOUNCING:
+    if (bouncing) {
+      return false;
+    }
+    state->status = KeyStatus::NOT_PRESSED;
+    return false;
+  }
+
+  return false; // unreached
+}
+
 bool Matrix::scan(void) {
   auto scanTime = millis();
 
@@ -37,17 +81,9 @@ bool Matrix::scan(void) {
     for (auto r = 0; r < (int)Matrix::Dim::Row; r++) {
       auto pressed = digitalRead(rowPins[r]) == LOW;
 
-      auto *keyOld = &keys[r][c];
-      KeyState keyNew = { .pressTime = scanTime, .pressed = pressed };
-
-      if (keyNew.pressed && !keyOld->pressed) {
-        *keyOld = keyNew;
-        update = true;
-      } else if (!keyNew.pressed && keyOld->pressed) {
-        if (keyNew.pressTime - keyOld->pressTime > debounceTime) {
-          keyOld->pressed = false;
-          update = true;
-        }
+      bool updated = updateState(r, c, pressed);
+      if(!update) {
+        update = updated;
       }
     }
   
@@ -58,7 +94,7 @@ bool Matrix::scan(void) {
 }
 
 bool Matrix::pressed(const Matrix::Key k) const {
-  return keys[k.r][k.c].pressed;
+  return keys[k.r][k.c].status == KeyStatus::PRESSED || keys[k.r][k.c].status == KeyStatus::PRESSED_BOUNCING;
 }
 
 void Matrix::sleep(void) {
